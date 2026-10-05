@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مولّد الجدول المدرسي — شركة الثقة</title>
-<meta name="description" content="نظام ذكي لبناء الجداول المدرسية — شركة الثقة، حلب جرابلس">
 <meta name="theme-color" content="#4f46e5">
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +19,7 @@
   --warning:#d97706;--warning-soft:#fef3c7;--info:#0284c7;--info-soft:#dbeafe;
   --morning:#d97706;--morning-soft:#fef3c7;
   --evening:#7c3aed;--evening-soft:#ede9fe;
+  --homeroom:#0891b2;--homeroom-soft:#cffafe;
   --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-full:999px;
   --sh-sm:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);
   --sh-md:0 4px 12px rgba(15,23,42,.08);
@@ -76,9 +76,8 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .auth-error{background:var(--danger-soft);color:var(--danger);padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;display:none;align-items:center;gap:10px;border:1px solid #fecaca;margin-bottom:16px}
 .auth-error.show{display:flex}
 .auth-error::before{content:'⚠';font-size:16px}
-.auth-note{font-size:11.5px;color:var(--text-3);text-align:center;margin-top:16px;line-height:1.7}
+.auth-note{font-size:11.5px;color:var(--text-3);text-align:center;margin-top:16px}
 .auth-link{color:var(--brand);font-weight:700;cursor:pointer}
-.auth-link:hover{text-decoration:underline}
 
 /* APP */
 .app{display:flex;min-height:100vh}
@@ -101,13 +100,13 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .nav{flex:1;padding:12px}
 .nav__step{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;color:#cbd5e1;font-size:13px;font-weight:500;cursor:pointer;width:100%;text-align:right;transition:all .18s;margin-bottom:3px;position:relative}
 .nav__step:hover{background:rgba(255,255,255,.06);color:#fff}
-.nav__step.active{background:linear-gradient(135deg,rgba(99,102,241,.9),rgba(79,70,229,.9));color:#fff;font-weight:600;box-shadow:0 8px 20px rgba(79,70,229,.35)}
+.nav__step.active{background:linear-gradient(135deg,rgba(99,102,241,.9),rgba(79,70,229,.9));color:#fff;font-weight:600}
 .nav__step.locked{opacity:.45;cursor:not-allowed}
 .nav__step.done .nav__step__num{background:#22c55e;color:#fff}
 .nav__step__num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:11.5px;font-weight:800;flex-shrink:0}
 .nav__step.active .nav__step__num{background:rgba(255,255,255,.25)}
 .nav__step__lock{margin-right:auto;font-size:12px;opacity:.6}
-.nav__divider{padding:14px 12px 6px;font-size:10.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+.nav__divider{padding:14px 12px 6px;font-size:10.5px;font-weight:700;color:#64748b;letter-spacing:.08em}
 .sidebar__footer{padding:14px 20px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:8px}
 .sidebar__dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 8px #22c55e}
 .main{flex:1;display:flex;flex-direction:column;min-width:0}
@@ -116,7 +115,6 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .topbar__title{font-size:18px;font-weight:700}
 .topbar__actions{display:flex;gap:8px;align-items:center}
 .user-chip{display:flex;align-items:center;gap:10px;padding:6px 12px 6px 6px;border-radius:var(--r-full);background:var(--surface-2);border:1px solid var(--border);cursor:pointer}
-.user-chip:hover{border-color:#cbd5e1;background:#fff}
 .user-chip__avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;overflow:hidden}
 .user-chip__avatar img{width:100%;height:100%;object-fit:cover}
 .user-chip__info{display:flex;flex-direction:column;text-align:right}
@@ -128,7 +126,6 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .btn:hover{transform:translateY(-1px)}
 .btn--primary{background:linear-gradient(180deg,var(--brand-2),var(--brand));color:#fff;box-shadow:0 6px 16px rgba(79,70,229,.25)}
 .btn--ghost{background:#fff;border-color:var(--border);color:var(--text-2)}
-.btn--ghost:hover{border-color:#cbd5e1;background:var(--surface-2)}
 .btn--danger{background:var(--danger-soft);color:var(--danger)}
 .btn--success{background:var(--success-soft);color:var(--success)}
 .btn--warning{background:var(--warning-soft);color:var(--warning)}
@@ -211,6 +208,7 @@ tbody tr:hover{background:var(--surface-2)}
 .badge--info{background:var(--info-soft);color:var(--info)}
 .badge--morning{background:var(--morning-soft);color:var(--morning)}
 .badge--evening{background:var(--evening-soft);color:var(--evening)}
+.badge--homeroom{background:var(--homeroom-soft);color:var(--homeroom)}
 
 .empty{padding:44px 24px;text-align:center}
 .empty__icon{width:60px;height:60px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-size:26px;margin:0 auto 14px}
@@ -226,26 +224,22 @@ tbody tr:hover{background:var(--surface-2)}
 .pill:hover{border-color:#cbd5e1}
 .pill.on{background:var(--brand);color:#fff;border-color:var(--brand)}
 
-/* SHIFT SELECTOR */
-.shift-selector{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.shift-selector{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .shift-card{background:#fff;border:2px solid var(--border);border-radius:14px;padding:16px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
 .shift-card:hover{border-color:#cbd5e1}
 .shift-card.active-morning{border-color:var(--morning);background:linear-gradient(180deg,#fff,var(--morning-soft))}
 .shift-card.active-evening{border-color:var(--evening);background:linear-gradient(180deg,#fff,var(--evening-soft))}
-.shift-card.active-none{border-color:var(--brand);background:linear-gradient(180deg,#fff,var(--brand-soft))}
 .shift-card__icon{font-size:28px;margin-bottom:8px}
 .shift-card__name{font-size:15px;font-weight:800;margin-bottom:4px}
 .shift-card__time{font-size:11.5px;color:var(--text-3);font-weight:600}
 .shift-card__check{position:absolute;top:12px;left:12px;width:22px;height:22px;border-radius:50%;background:var(--success);color:#fff;display:none;place-items:center;font-size:12px;font-weight:800}
 .shift-card.active-morning .shift-card__check,
-.shift-card.active-evening .shift-card__check,
-.shift-card.active-none .shift-card__check{display:grid}
+.shift-card.active-evening .shift-card__check{display:grid}
 
 .shift-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;margin-right:6px}
 .shift-tag--morning{background:var(--morning-soft);color:var(--morning)}
 .shift-tag--evening{background:var(--evening-soft);color:var(--evening)}
 
-/* SHIFT PERIODS EDITOR */
 .shift-editor{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:900px){.shift-editor{grid-template-columns:1fr}}
 .shift-editor__col{background:var(--surface-2);border-radius:12px;padding:14px;border:2px solid var(--border)}
@@ -282,6 +276,7 @@ tbody tr:hover{background:var(--surface-2)}
 .slot.empty{color:var(--text-3);font-size:11px;font-style:italic}
 .slot__subject{font-weight:700;font-size:11.5px;line-height:1.25}
 .slot__teacher{color:var(--text-2);font-size:10.5px}
+.slot__teacher.homeroom{color:var(--homeroom);font-weight:700}
 
 .teacher-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
 .teacher-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
@@ -383,7 +378,7 @@ tbody tr:hover{background:var(--surface-2)}
           <h2>ابنِ الجدول المدرسي <span>في دقائق</span></h2>
           <ul class="auth-side__features">
             <li>دعم الفوجين الصباحي والمسائي</li>
-            <li>حساب خاص لكل مدرسة</li>
+            <li>ميزة معلم الصف</li>
             <li>جدول منفصل لكل مدرّس</li>
             <li>شعار وتوقيع المدير</li>
             <li>تصدير PDF و Excel و PNG</li>
@@ -391,7 +386,7 @@ tbody tr:hover{background:var(--surface-2)}
         </div>
       </div>
       <div class="auth-side__footer">
-        <div>الإصدار 5.0 · جميع البيانات محفوظة على جهازك فقط</div>
+        <div>الإصدار 6.0 · جميع البيانات محفوظة محلياً</div>
         <div style="margin-top:6px;color:#94a3b8">شركة الثقة · حلب — جرابلس</div>
       </div>
     </div>
@@ -403,17 +398,17 @@ tbody tr:hover{background:var(--surface-2)}
       <div class="auth-error" id="auth-error"></div>
       <form id="form-login" onsubmit="handleLogin(event)">
         <h2 class="auth-title">مرحباً بك مجدداً</h2>
-        <p class="auth-sub">أدخل بيانات حسابك للوصول إلى لوحة التحكم</p>
+        <p class="auth-sub">أدخل بياناتك للوصول إلى لوحة التحكم</p>
         <div class="auth-form-grid">
           <div class="auth-field"><label>اسم المستخدم <span class="req">*</span></label><div class="auth-field__input"><input type="text" id="login-username" required></div></div>
           <div class="auth-field"><label>كلمة المرور <span class="req">*</span></label><div class="auth-field__input"><input type="password" id="login-password" required><button type="button" class="auth-field__toggle" onclick="togglePassword('login-password',this)">👁</button></div></div>
           <button type="submit" class="auth-btn">🔓 تسجيل الدخول</button>
         </div>
-        <p class="auth-note">ليس لديك حساب؟ <span class="auth-link" onclick="switchAuthTab('register')">أنشئ حساب مدرسة جديد</span></p>
+        <p class="auth-note">ليس لديك حساب؟ <span class="auth-link" onclick="switchAuthTab('register')">أنشئ حساب مدرسة</span></p>
       </form>
       <form id="form-register" onsubmit="handleRegister(event)" style="display:none">
         <h2 class="auth-title">إنشاء حساب مدرسة</h2>
-        <p class="auth-sub">سجّل بيانات مدير المدرسة لبدء الاستخدام</p>
+        <p class="auth-sub">سجّل بيانات مدير المدرسة</p>
         <div class="auth-form-grid">
           <div class="auth-row">
             <div class="auth-field"><label>اسم المستخدم <span class="req">*</span></label><div class="auth-field__input"><input type="text" id="reg-username" required minlength="3"></div></div>
@@ -428,7 +423,7 @@ tbody tr:hover{background:var(--surface-2)}
           <label class="auth-check"><input type="checkbox" id="reg-seed" checked><span>تعبئة بيانات تجريبية مع الفوجين</span></label>
           <button type="submit" class="auth-btn">✨ إنشاء الحساب والدخول</button>
         </div>
-        <p class="auth-note">لديك حساب بالفعل؟ <span class="auth-link" onclick="switchAuthTab('login')">تسجيل الدخول</span></p>
+        <p class="auth-note">لديك حساب؟ <span class="auth-link" onclick="switchAuthTab('login')">تسجيل الدخول</span></p>
       </form>
     </div>
   </div>
@@ -492,7 +487,7 @@ tbody tr:hover{background:var(--surface-2)}
       <section id="route-home" class="route">
         <div class="hero">
           <h1 id="hero-welcome">مرحباً بك</h1>
-          <p>نظام متكامل يدعم الفوجين الصباحي والمسائي — 8 خطوات + جداول المدرسين</p>
+          <p>نظام متكامل يدعم الفوجين + معلم الصف</p>
           <div class="hero__stats">
             <div class="hero__stat"><strong id="h-subjects">0</strong><span>مادة</span></div>
             <div class="hero__stat"><strong id="h-teachers">0</strong><span>مدرّس</span></div>
@@ -511,7 +506,7 @@ tbody tr:hover{background:var(--surface-2)}
       <section id="route-school" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
-            <div><div class="card__title">🏫 الخطوة 1: معلومات المدرسة</div><div class="card__sub">تظهر في ترويسة الجدول</div></div>
+            <div><div class="card__title">🏫 الخطوة 1: معلومات المدرسة</div></div>
             <button class="btn btn--primary" onclick="saveSchool()">💾 حفظ والمتابعة</button>
           </div>
           <div class="card__body">
@@ -535,7 +530,7 @@ tbody tr:hover{background:var(--surface-2)}
       <section id="route-config" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
-            <div><div class="card__title">🌗 الخطوة 2: نظام الفوجين</div><div class="card__sub">فعّل الفوج الصباحي والمسائي ليعمل النظام عليهما</div></div>
+            <div><div class="card__title">🌗 الخطوة 2: نظام الفوجين</div></div>
           </div>
           <div class="card__body">
             <label class="auth-check" style="font-size:14px;font-weight:700;margin-bottom:16px"><input type="checkbox" id="cfg-shifts-enabled" onchange="toggleShiftsEnabled()" style="width:auto"><span>تفعيل نظام الفوجين (صباحي / مسائي)</span></label>
@@ -568,7 +563,7 @@ tbody tr:hover{background:var(--surface-2)}
               </div>
             </div>
             <div id="simple-config-area" style="margin-top:20px">
-              <div class="form-section-title" style="font-size:13px;color:var(--brand);font-weight:700;padding-bottom:10px;border-bottom:1px dashed var(--border);margin-bottom:14px;display:flex;align-items:center;gap:8px">📅 الأيام والحصص</div>
+              <div style="font-size:13px;color:var(--brand);font-weight:700;padding-bottom:10px;border-bottom:1px dashed var(--border);margin-bottom:14px">📅 الأيام والحصص</div>
               <div class="pills" id="days-pills"></div>
               <div class="form-grid form-grid--3" style="margin-top:16px">
                 <div class="field"><label>عدد الحصص اليومية</label><input type="number" id="cfg-periods-count" min="1" max="12" value="7" onchange="resizePeriods()"></div>
@@ -599,10 +594,10 @@ tbody tr:hover{background:var(--surface-2)}
       <section id="route-teachers" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
-            <div><div class="card__title">👨‍🏫 الخطوة 4: المدرسون</div></div>
+            <div><div class="card__title">👨‍🏫 الخطوة 4: المدرسون</div><div class="card__sub">يمكن تعيين مدرّس كمعلم صف لصف معين</div></div>
             <button class="btn btn--primary btn--sm" onclick="openTeacherModal()">＋ إضافة مدرّس</button>
           </div>
-          <div class="card__body"><div class="table-wrap"><table id="teachers-tbl"><thead><tr><th style="width:60px">#</th><th>الاسم</th><th>التخصصات</th><th>الحد/يوم</th><th>الحد/أسبوع</th><th style="width:140px"></th></tr></thead><tbody></tbody></table></div></div>
+          <div class="card__body"><div class="table-wrap"><table id="teachers-tbl"><thead><tr><th style="width:60px">#</th><th>الاسم</th><th>التخصصات</th><th>معلم صف</th><th>الحد/يوم</th><th>الحد/أسبوع</th><th style="width:140px"></th></tr></thead><tbody></tbody></table></div></div>
         </div>
       </section>
 
@@ -613,10 +608,7 @@ tbody tr:hover{background:var(--surface-2)}
             <div><div class="card__title">🎓 الخطوة 5: الصفوف والشعب</div><div class="card__sub">حدّد فوج كل صف</div></div>
             <button class="btn btn--primary btn--sm" onclick="openClassModal()">＋ إضافة صف/شعبة</button>
           </div>
-          <div class="card__body">
-            <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap" id="classes-filter"></div>
-            <div class="table-wrap"><table id="classes-tbl"><thead><tr><th style="width:60px">#</th><th>الصف</th><th>الشعبة</th><th>الطلاب</th><th>الفوج</th><th style="width:140px"></th></tr></thead><tbody></tbody></table></div>
-          </div>
+          <div class="card__body"><div class="table-wrap"><table id="classes-tbl"><thead><tr><th style="width:60px">#</th><th>الصف</th><th>الشعبة</th><th>الطلاب</th><th>الفوج</th><th>معلم الصف</th><th style="width:140px"></th></tr></thead><tbody></tbody></table></div></div>
         </div>
       </section>
 
@@ -632,6 +624,7 @@ tbody tr:hover{background:var(--surface-2)}
           </div>
           <div class="card__body">
             <div class="field" style="max-width:400px;margin-bottom:18px"><label>اختر الصف/الشعبة</label><select id="assign-class" onchange="renderAssignments()"></select></div>
+            <div id="assign-target-info"></div>
             <div class="table-wrap"><table id="assignments-tbl"><thead><tr><th>المادة</th><th>الحصص/أسبوع</th><th>المدرّس</th><th style="width:100px">الحالة</th></tr></thead><tbody></tbody></table></div>
           </div>
         </div>
@@ -646,7 +639,7 @@ tbody tr:hover{background:var(--surface-2)}
               <div class="field"><label>الحد الأقصى للحصص المتتالية للمدرّس</label><input type="number" id="cfg-max-consecutive" min="1" max="8" value="4"></div>
               <div class="field"><label>الحد الأقصى للحصص اليومية للصف</label><input type="number" id="cfg-max-class-per-day" min="1" max="12" value="6"></div>
               <div class="field"><label>عدد الأيام بين تكرار المادة</label><input type="number" id="cfg-spread-days" min="1" max="5" value="1"></div>
-              <div class="field"><label>السماح بحصص فراغ للمدرّس</label><div style="display:flex;align-items:center;gap:10px;padding:10px 0"><input type="checkbox" id="cfg-allow-gaps" style="width:auto"><span style="font-size:13px">السماح</span></div></div>
+              <div class="field"><label>السماح بحصص فراغ</label><div style="display:flex;align-items:center;gap:10px;padding:10px 0"><input type="checkbox" id="cfg-allow-gaps" style="width:auto"><span style="font-size:13px">السماح</span></div></div>
             </div>
             <div style="margin-top:22px">
               <div style="font-size:13px;font-weight:700;margin-bottom:12px">📌 قيود المدرسين</div>
@@ -683,7 +676,7 @@ tbody tr:hover{background:var(--surface-2)}
       <section id="route-teachers-tt" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
-            <div><div class="card__title">👨‍🏫 جداول المدرسين</div><div class="card__sub">جدول لكل مدرّس يعرض كل حصصه (صباحي + مسائي)</div></div>
+            <div><div class="card__title">👨‍🏫 جداول المدرسين</div><div class="card__sub">جدول لكل مدرّس يعرض حصصه</div></div>
             <div class="card__tools">
               <button class="btn btn--success btn--sm" onclick="exportPDF('teachers')">📄 PDF</button>
               <button class="btn btn--info btn--sm" onclick="exportPNG('teachers')">🖼 PNG</button>
@@ -746,6 +739,16 @@ tbody tr:hover{background:var(--surface-2)}
             <button type="button" class="pill" data-shift="evening" onclick="toggleTeacherShift('evening')">🌙 مسائي</button>
           </div>
           <span class="field__hint">اتركهما بدون تحديد إذا كان يعمل في كليهما</span>
+        </div>
+        <div class="field field--full" id="t-homeroom-field">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+            <input type="checkbox" id="t-is-homeroom" onchange="toggleHomeroomField()" style="width:auto">
+            <span>🎓 معلم صف (يظهر في الجدول باسم "معلم الصف" بدل اسمه)</span>
+          </label>
+        </div>
+        <div class="field field--full" id="t-homeroom-classes-field" style="display:none">
+          <label>الصفوف التي هو معلمها <span class="req">*</span></label>
+          <div class="pills" id="t-homeroom-classes" style="padding:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;min-height:52px"></div>
         </div>
         <div class="field field--full"><label>التخصصات <span class="req">*</span></label><div id="t-subjects-chips" class="pills" style="padding:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;min-height:52px"></div></div>
       </div>
@@ -839,7 +842,7 @@ tbody tr:hover{background:var(--surface-2)}
 <script>
 /* ================= AUTH ================= */
 const Auth = {
-  KEY:'timetable_v5_schools', SESSION:'timetable_v5_session',
+  KEY:'timetable_v6_schools', SESSION:'timetable_v6_session',
   getSchools(){ try{return JSON.parse(localStorage.getItem(this.KEY))||{};}catch{return{};} },
   saveSchools(s){ try{localStorage.setItem(this.KEY,JSON.stringify(s));}catch(e){toast('مساحة التخزين ممتلئة','error');} },
   getSession(){ return localStorage.getItem(this.SESSION); },
@@ -870,7 +873,7 @@ const Auth = {
   updateCurrent(patch){ const id=this.getSession(); if(!id) return; const s=this.getSchools(); if(!s[id]) return; Object.assign(s[id],patch); this.saveSchools(s); }
 };
 
-/* ================= DEFAULT PERIODS ================= */
+/* ================= DEFAULT DATA ================= */
 function defaultMorningPeriods(){
   return [
     {id:uid(),name:'الحصة الأولى',start:'07:30',end:'08:10',isBreak:false},
@@ -934,16 +937,23 @@ function seedDemoData(data){
   ];
   presets.forEach(p=>data.subjects.push({id:uid(),...p}));
   const s=data.subjects;
-  data.teachers.push({id:uid(),name:'أ. محمد الأحمد',subjects:[s[0].id,s[1].id],maxDay:6,maxWeek:30,shifts:['morning']});
-  data.teachers.push({id:uid(),name:'أ. سارة الخطيب',subjects:[s[1].id,s[2].id],maxDay:6,maxWeek:30,shifts:['morning']});
+  // معلم صف للصف الأول
+  const homeroomTeacher = {id:uid(),name:'أ. هدى السيد',subjects:[s[0].id,s[1].id,s[2].id,s[5].id],maxDay:6,maxWeek:30,shifts:['morning'],isHomeroom:true,homeroomClasses:[]};
+  data.teachers.push(homeroomTeacher);
+  data.teachers.push({id:uid(),name:'أ. محمد الأحمد',subjects:[s[1].id,s[3].id],maxDay:6,maxWeek:30,shifts:['morning']});
   data.teachers.push({id:uid(),name:'أ. خالد النور',subjects:[s[3].id,s[4].id],maxDay:6,maxWeek:30,shifts:['morning','evening']});
   data.teachers.push({id:uid(),name:'أ. ريم العلي',subjects:[s[0].id,s[5].id],maxDay:6,maxWeek:30,shifts:['morning','evening']});
   data.teachers.push({id:uid(),name:'أ. يوسف حسن',subjects:[s[1].id,s[2].id],maxDay:6,maxWeek:30,shifts:['evening']});
   data.teachers.push({id:uid(),name:'أ. لينا خليل',subjects:[s[3].id,s[4].id],maxDay:6,maxWeek:30,shifts:['evening']});
-  data.classes.push({id:uid(),grade:'الأول',section:'أ',count:28,shift:'morning'});
-  data.classes.push({id:uid(),grade:'الثاني',section:'أ',count:26,shift:'morning'});
-  data.classes.push({id:uid(),grade:'السابع',section:'أ',count:30,shift:'evening'});
-  data.classes.push({id:uid(),grade:'الثامن',section:'أ',count:29,shift:'evening'});
+  
+  const c1={id:uid(),grade:'الأول',section:'أ',count:28,shift:'morning'};
+  const c2={id:uid(),grade:'الثاني',section:'أ',count:26,shift:'morning'};
+  const c3={id:uid(),grade:'السابع',section:'أ',count:30,shift:'evening'};
+  const c4={id:uid(),grade:'الثامن',section:'أ',count:29,shift:'evening'};
+  data.classes.push(c1,c2,c3,c4);
+  
+  homeroomTeacher.homeroomClasses=[c1.id];
+  
   data.school.year='2024 / 2025';
   data.school.district='مديرية التربية';
 }
@@ -978,7 +988,6 @@ function isStepDone(k){
   }
   if(k==='constraints') return true;
   if(k==='timetable') return Object.keys(store.timetable).length>0;
-  if(k==='teachers-tt') return Object.keys(store.timetable).length>0;
   return false;
 }
 
@@ -1019,20 +1028,34 @@ function getClassShift(classId){
   return c?.shift||null;
 }
 function getPeriodsForClass(classId){
-  if(store.shiftsEnabled){
+  if(store.shiftsEnabled && store.shifts){
     const shift=getClassShift(classId);
-    if(shift==='morning') return store.shifts.morning.periods.filter(p=>!p.isBreak);
-    if(shift==='evening') return store.shifts.evening.periods.filter(p=>!p.isBreak);
+    if(shift==='morning' && store.shifts.morning) return store.shifts.morning.periods.filter(p=>!p.isBreak);
+    if(shift==='evening' && store.shifts.evening) return store.shifts.evening.periods.filter(p=>!p.isBreak);
   }
   return store.periods;
 }
 function getPeriodsDisplayForClass(classId){
-  if(store.shiftsEnabled){
+  if(store.shiftsEnabled && store.shifts){
     const shift=getClassShift(classId);
-    if(shift==='morning') return store.shifts.morning.periods;
-    if(shift==='evening') return store.shifts.evening.periods;
+    if(shift==='morning' && store.shifts.morning) return store.shifts.morning.periods;
+    if(shift==='evening' && store.shifts.evening) return store.shifts.evening.periods;
   }
   return store.periods;
+}
+function isHomeroomForClass(teacherId, classId){
+  const t=store.teachers.find(x=>x.id===teacherId);
+  if(!t||!t.isHomeroom) return false;
+  return (t.homeroomClasses||[]).includes(classId);
+}
+function displayTeacherName(teacherId, classId){
+  if(!teacherId) return '—';
+  if(isHomeroomForClass(teacherId, classId)) return '🎓 معلم الصف';
+  const t=store.teachers.find(x=>x.id===teacherId);
+  return t?.name||'—';
+}
+function isTeacherHomeroomName(teacherId, classId){
+  return isHomeroomForClass(teacherId, classId);
 }
 
 /* ================= AUTH UI ================= */
@@ -1048,7 +1071,6 @@ function togglePassword(id,btn){
   else{el.type='password';btn.textContent='👁';}
 }
 function showAuthError(m){const el=$('auth-error');el.textContent=m;el.classList.add('show');}
-
 function handleLogin(e){
   e.preventDefault();$('auth-error').classList.remove('show');
   try{Auth.setSession(Auth.login($('login-username').value,$('login-password').value));enterApp();}
@@ -1071,10 +1093,18 @@ function enterApp(){
   const school=Auth.current();
   if(!school){showAuthScreen();return;}
   store=school.data;
+  // initialize defaults safely
   if(!store.shifts) store.shifts={morning:{label:'صباحي',periods:defaultMorningPeriods(),weeklyTarget:29},evening:{label:'مسائي',periods:defaultEveningPeriods(),weeklyTarget:30}};
   if(typeof store.shiftsEnabled==='undefined') store.shiftsEnabled=false;
   if(!store.school.logo) store.school.logo=null;
   if(!store.school.signature) store.school.signature=null;
+  if(!store.availability) store.availability={};
+  // ensure teachers have shifts and homeroom props
+  store.teachers.forEach(t=>{
+    if(!t.shifts) t.shifts=[];
+    if(typeof t.isHomeroom==='undefined') t.isHomeroom=false;
+    if(!t.homeroomClasses) t.homeroomClasses=[];
+  });
   $('auth-screen').style.display='none';
   $('app').classList.remove('hidden');
   updateUI();
@@ -1146,7 +1176,7 @@ function navigate(route,force=false){
     assignments:renderAssignmentsPage,constraints:renderConstraints,
     timetable:renderTimetables,'teachers-tt':renderTeachersTT
   };
-  R[route]?.();
+  if(R[route]) R[route]();
   renderProgress();
 }
 function goNext(){const idx=STEPS.findIndex(s=>s.key===currentRoute);if(idx<STEPS.length-1)navigate(STEPS[idx+1].key);}
@@ -1229,7 +1259,7 @@ function saveSchool(){
   persist();updateUI();toast('تم الحفظ');goNext();
 }
 
-/* ================= CONFIG (Days + Shifts) ================= */
+/* ================= CONFIG ================= */
 const DEFAULT_DAYS=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 
 function renderConfig(){
@@ -1263,27 +1293,24 @@ function renderShiftPeriods(shiftKey){
   wrap.innerHTML=shift.periods.map((p,i)=>{
     const idx=shift.periods.indexOf(p);
     return `<div class="period-row ${p.isBreak?'period-row--break':''}">
-      <input value="${esc(p.name)}" onchange="updateShiftPeriod('${shiftKey}',${idx},'name',this.value)" placeholder="اسم">
+      <input value="${esc(p.name)}" onchange="updateShiftPeriod('${shiftKey}',${idx},'name',this.value)">
       <input type="time" value="${p.start}" onchange="updateShiftPeriod('${shiftKey}',${idx},'start',this.value)">
       <input type="time" value="${p.end}" onchange="updateShiftPeriod('${shiftKey}',${idx},'end',this.value)">
       <button class="period-row__del" onclick="removeShiftPeriod('${shiftKey}',${idx})">✕</button>
     </div>`;
   }).join('');
 }
-function updateShiftPeriod(shiftKey,i,key,val){
-  store.shifts[shiftKey].periods[i][key]=val;persist();
-}
-function removeShiftPeriod(shiftKey,i){
-  store.shifts[shiftKey].periods.splice(i,1);persist();renderShiftPeriods(shiftKey);
-}
+function updateShiftPeriod(shiftKey,i,key,val){store.shifts[shiftKey].periods[i][key]=val;persist();}
+function removeShiftPeriod(shiftKey,i){store.shifts[shiftKey].periods.splice(i,1);persist();renderShiftPeriods(shiftKey);}
 function addShiftPeriod(shiftKey,isBreak){
   const periods=store.shifts[shiftKey].periods;
   const last=periods[periods.length-1];
   const start=last?.end||'08:00';
   const [h,m]=start.split(':').map(Number);
-  const endM=(h*60+m+(isBreak?10:40));
+  const dur=isBreak?10:40;
+  const endM=(h*60+m+dur);
   const end=`${String(Math.floor(endM/60)).padStart(2,'0')}:${String(endM%60).padStart(2,'0')}`;
-  const name=isBreak?(start.startsWith('0')&&parseInt(start)<12?'استراحة':'استراحة'):'حصة جديدة';
+  const name=isBreak?'فرصة':'حصة جديدة';
   periods.push({id:uid(),name:name,start:start,end:end,isBreak:isBreak});
   persist();renderShiftPeriods(shiftKey);
 }
@@ -1359,7 +1386,7 @@ function deleteSubject(id){
       Object.keys(g).forEach(k=>{if(g[k]?.subjectId===id) delete g[k];});
     });
     store.teachers.forEach(t=>{t.subjects=(t.subjects||[]).filter(sid=>sid!==id);});
-    persist();renderSubjects();renderTeachers();renderProgress();toast('تم الحذف','info');
+    persist();renderSubjects();renderTeachers();renderProgress();toast('تم','info');
   });
 }
 function renderSubjects(){
@@ -1394,7 +1421,7 @@ function presetSubjects(){
 }
 
 /* ================= TEACHERS ================= */
-let editingTeacher=null,tempSubjects=[],tempShifts=[];
+let editingTeacher=null,tempSubjects=[],tempShifts=[],tempHomeroomClasses=[];
 
 function openTeacherModal(id){
   editingTeacher=id||null;
@@ -1405,19 +1432,39 @@ function openTeacherModal(id){
   $('t-max-day').value=t?.maxDay||6;
   $('t-max-week').value=t?.maxWeek||30;
   tempShifts=t?.shifts?[...t.shifts]:[];
+  tempHomeroomClasses=t?.homeroomClasses?[...t.homeroomClasses]:[];
+  $('t-is-homeroom').checked=!!t?.isHomeroom;
   renderTeacherShifts();
+  renderHomeroomClassesChips();
   renderTeacherSubjectsChips(t?.subjects||[]);
+  toggleHomeroomField();
   openModal('m-teacher');
 }
+function toggleHomeroomField(){
+  const isOn=$('t-is-homeroom').checked;
+  $('t-homeroom-classes-field').style.display=isOn?'flex':'none';
+}
 function renderTeacherShifts(){
-  document.querySelectorAll('#t-shifts .pill').forEach(p=>{
-    p.classList.toggle('on',tempShifts.includes(p.dataset.shift));
-  });
+  document.querySelectorAll('#t-shifts .pill').forEach(p=>{p.classList.toggle('on',tempShifts.includes(p.dataset.shift));});
 }
 function toggleTeacherShift(shift){
   const i=tempShifts.indexOf(shift);
   if(i>-1) tempShifts.splice(i,1); else tempShifts.push(shift);
   renderTeacherShifts();
+}
+function renderHomeroomClassesChips(){
+  const wrap=$('t-homeroom-classes');
+  if(!wrap) return;
+  if(!store.classes.length){wrap.innerHTML='<span style="color:var(--text-3);font-size:12.5px">أضف صفوفاً أولاً</span>';return;}
+  wrap.innerHTML=store.classes.map(c=>{
+    const on=tempHomeroomClasses.includes(c.id);
+    return `<button type="button" class="pill ${on?'on':''}" onclick="toggleHomeroomClass(${c.id})" style="padding:6px 12px;font-size:12px">${esc(c.grade)}/${esc(c.section)}</button>`;
+  }).join('');
+}
+function toggleHomeroomClass(cid){
+  const i=tempHomeroomClasses.indexOf(cid);
+  if(i>-1) tempHomeroomClasses.splice(i,1); else tempHomeroomClasses.push(cid);
+  renderHomeroomClassesChips();
 }
 function renderTeacherSubjectsChips(selected){
   tempSubjects=[...selected];
@@ -1437,7 +1484,9 @@ function saveTeacher(){
   const name=$('t-name').value.trim();
   if(!name){toast('الاسم مطلوب','error');return;}
   if(!tempSubjects.length){toast('اختر تخصصاً','error');return;}
-  const data={name,phone:$('t-phone').value.trim(),maxDay:Math.max(1,parseInt($('t-max-day').value)||6),maxWeek:Math.max(1,parseInt($('t-max-week').value)||30),subjects:[...tempSubjects],shifts:[...tempShifts]};
+  const isHomeroom=$('t-is-homeroom').checked;
+  if(isHomeroom && !tempHomeroomClasses.length){toast('اختر صفاً واحداً على الأقل لمعلم الصف','error');return;}
+  const data={name,phone:$('t-phone').value.trim(),maxDay:Math.max(1,parseInt($('t-max-day').value)||6),maxWeek:Math.max(1,parseInt($('t-max-week').value)||30),subjects:[...tempSubjects],shifts:[...tempShifts],isHomeroom:isHomeroom,homeroomClasses:isHomeroom?[...tempHomeroomClasses]:[]};
   if(editingTeacher) Object.assign(store.teachers.find(x=>x.id===editingTeacher),data);
   else store.teachers.push({id:uid(),...data});
   persist();closeModal('m-teacher');renderTeachers();renderProgress();toast('تم');editingTeacher=null;
@@ -1459,11 +1508,13 @@ function renderTeachers(){
   tb.innerHTML=store.teachers.length
     ? store.teachers.map((t,i)=>{
       const subs=(t.subjects||[]).map(sid=>store.subjects.find(s=>s.id===sid)).filter(Boolean);
-      const shifts=(t.shifts||[]).map(sh=>sh==='morning'?'<span class="shift-tag shift-tag--morning">☀️ صباحي</span>':'<span class="shift-tag shift-tag--evening">🌙 مسائي</span>').join('');
+      const shifts=(t.shifts||[]).map(sh=>sh==='morning'?'<span class="shift-tag shift-tag--morning">☀️</span>':'<span class="shift-tag shift-tag--evening">🌙</span>').join('');
+      const homeroomTag=t.isHomeroom?`<span class="badge badge--homeroom badge--plain">🎓 ${(t.homeroomClasses||[]).length} صف</span>`:'<span class="cell-muted">—</span>';
       return `<tr>
         <td><span class="cell-muted">${i+1}</span></td>
         <td><div class="cell-name">${esc(t.name)}</div>${shifts?`<div style="margin-top:4px">${shifts}</div>`:''}</td>
         <td>${subs.length?subs.map(s=>`<span class="badge badge--plain" style="background:${s.color}22;color:${s.color};margin-left:4px">${esc(s.name)}</span>`).join(''):'<span class="cell-muted">—</span>'}</td>
+        <td>${homeroomTag}</td>
         <td><span class="badge badge--info badge--plain">${t.maxDay}</span></td>
         <td><span class="badge badge--info badge--plain">${t.maxWeek}</span></td>
         <td><div style="display:flex;gap:6px;justify-content:flex-end">
@@ -1472,7 +1523,7 @@ function renderTeachers(){
         </div></td>
       </tr>`;
     }).join('')
-    : `<tr><td colspan="6"><div class="empty"><div class="empty__icon">👨‍🏫</div><div class="empty__title">لا يوجد مدرّسون</div><button class="btn btn--primary" onclick="openTeacherModal()">＋ إضافة</button></div></td></tr>`;
+    : `<tr><td colspan="7"><div class="empty"><div class="empty__icon">👨‍🏫</div><div class="empty__title">لا يوجد مدرّسون</div><button class="btn btn--primary" onclick="openTeacherModal()">＋ إضافة</button></div></td></tr>`;
 }
 
 /* ================= CLASSES ================= */
@@ -1501,16 +1552,13 @@ function renderTimePreviews(){
 }
 function renderClassShiftSelector(){
   document.querySelectorAll('#cl-shift-selector .shift-card').forEach(card=>{
-    card.classList.remove('active-morning','active-evening','active-none');
+    card.classList.remove('active-morning','active-evening');
     if(card.dataset.shift===editingShift){
       card.classList.add(editingShift==='morning'?'active-morning':'active-evening');
     }
   });
 }
-function selectClassShift(shift){
-  editingShift=shift;
-  renderClassShiftSelector();
-}
+function selectClassShift(shift){editingShift=shift;renderClassShiftSelector();}
 function saveClass(){
   const section=$('cl-section').value.trim();
   if(!section){toast('الشعبة مطلوبة','error');return;}
@@ -1525,6 +1573,7 @@ function deleteClass(id){
     store.classes=store.classes.filter(c=>c.id!==id);
     store.assignments=store.assignments.filter(a=>a.classId!==id);
     delete store.timetable[id];
+    store.teachers.forEach(t=>{t.homeroomClasses=(t.homeroomClasses||[]).filter(cid=>cid!==id);});
     persist();renderClasses();renderProgress();toast('تم','info');
   });
 }
@@ -1533,19 +1582,23 @@ function renderClasses(){
   tb.innerHTML=store.classes.length
     ? store.classes.map((c,i)=>{
       const shiftTag=c.shift==='morning'?'<span class="badge badge--morning badge--plain">☀️ صباحي</span>':c.shift==='evening'?'<span class="badge badge--evening badge--plain">🌙 مسائي</span>':'<span class="cell-muted">—</span>';
+      // Find homeroom teacher for this class
+      const homeroomTeacher = store.teachers.find(t=>t.isHomeroom && (t.homeroomClasses||[]).includes(c.id));
+      const homeroomTag = homeroomTeacher? `<span class="badge badge--homeroom badge--plain">🎓 ${esc(homeroomTeacher.name)}</span>` : '<span class="cell-muted">—</span>';
       return `<tr>
         <td><span class="cell-muted">${i+1}</span></td>
         <td><span class="cell-name">${esc(c.grade)}</span></td>
         <td><span class="badge badge--info badge--plain">شعبة ${esc(c.section)}</span></td>
         <td><span class="cell-muted">${c.count||0} طالب</span></td>
         <td>${shiftTag}</td>
+        <td>${homeroomTag}</td>
         <td><div style="display:flex;gap:6px;justify-content:flex-end">
           <button class="btn btn--ghost btn--sm" onclick="openClassModal(${c.id})">تحرير</button>
           <button class="btn btn--danger btn--sm" onclick="deleteClass(${c.id})">حذف</button>
         </div></td>
       </tr>`;
     }).join('')
-    : `<tr><td colspan="6"><div class="empty"><div class="empty__icon">🎓</div><div class="empty__title">لا توجد صفوف</div><button class="btn btn--primary" onclick="openClassModal()">＋ إضافة صف</button></div></td></tr>`;
+    : `<tr><td colspan="7"><div class="empty"><div class="empty__icon">🎓</div><div class="empty__title">لا توجد صفوف</div><button class="btn btn--primary" onclick="openClassModal()">＋ إضافة صف</button></div></td></tr>`;
 }
 
 /* ================= ASSIGNMENTS ================= */
@@ -1560,11 +1613,16 @@ function renderAssignmentsPage(){
 function renderAssignments(){
   const cid=parseInt($('assign-class').value);
   const tb=document.querySelector('#assignments-tbl tbody');
-  if(!cid){tb.innerHTML=`<tr><td colspan="4"><div class="empty"><div class="empty__icon">🎓</div><div class="empty__title">أضف صفوفاً</div></div></td></tr>`;return;}
+  const targetInfo=$('assign-target-info');
+  if(!cid){tb.innerHTML=`<tr><td colspan="4"><div class="empty"><div class="empty__icon">🎓</div><div class="empty__title">أضف صفوفاً</div></div></td></tr>`;targetInfo.innerHTML='';return;}
   const cls=store.classes.find(c=>c.id===cid);
-  // حصص الفوج المستهدفة
-  let target = cls?.shift==='morning' ? store.shifts?.morning?.weeklyTarget : cls?.shift==='evening' ? store.shifts?.evening?.weeklyTarget : null;
-  const targetInfo = target ? `<div style="margin-bottom:12px;padding:10px 14px;background:var(--brand-soft);border-radius:9px;font-size:12.5px;color:var(--brand-dark);font-weight:600">النصاب الأسبوعي المطلوب لهذا الصف: <strong>${target} حصة</strong></div>` : '';
+  const target=cls?.shift==='morning'? store.shifts?.morning?.weeklyTarget : cls?.shift==='evening'? store.shifts?.evening?.weeklyTarget : null;
+  if(target){
+    const currentSum=store.assignments.filter(a=>a.classId===cid).reduce((s,a)=>s+(a.weekly||0),0);
+    const diff=currentSum-target;
+    const color = diff===0?'success':diff>0?'danger':'warning';
+    targetInfo.innerHTML=`<div style="padding:12px 16px;background:var(--${color}-soft);border-radius:10px;font-size:13px;color:var(--${color});font-weight:600;margin-bottom:14px">النصاب: <strong>${currentSum} / ${target}</strong> حصة ${diff!==0?`(${diff>0?'زيادة':'(ناقص '+Math.abs(diff)+')'})`:' ✓'}</div>`;
+  } else targetInfo.innerHTML='';
   
   tb.innerHTML=store.subjects.map(s=>{
     const a=store.assignments.find(x=>x.classId===cid&&x.subjectId===s.id);
@@ -1573,24 +1631,17 @@ function renderAssignments(){
     return `<tr>
       <td><div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:${esc(s.color)}"></span><span class="cell-name">${esc(s.name)}</span></div></td>
       <td><input type="number" min="0" max="20" value="${a?.weekly??s.weekly}" onchange="updateAssignWeekly(${cid},${s.id},this.value)" style="width:80px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;text-align:center"></td>
-      <td><select onchange="updateAssignTeacher(${cid},${s.id},this.value)" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff"><option value="">— بدون —</option>${eligible.length?eligible.map(t=>`<option value="${t.id}" ${a?.teacherId===t.id?'selected':''}>${esc(t.name)}</option>`).join(''):'<option disabled>لا يوجد مدرّس مؤهّل لهذا الفوج</option>'}</select></td>
+      <td><select onchange="updateAssignTeacher(${cid},${s.id},this.value)" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:#fff"><option value="">— بدون —</option>${eligible.length?eligible.map(t=>`<option value="${t.id}" ${a?.teacherId===t.id?'selected':''}>${esc(t.name)}${t.isHomeroom?' 🎓':''}</option>`).join(''):'<option disabled>لا يوجد مدرّس مؤهّل لهذا الفوج</option>'}</select></td>
       <td>${has?'<span class="badge badge--success">✓ مُسند</span>':'<span class="badge badge--warning">! ناقص</span>'}</td>
     </tr>`;
   }).join('');
-  // Add target info at top
-  const container=tb.closest('table').parentElement;
-  let info=container.querySelector('.target-info');
-  if(targetInfo){
-    if(!info){info=document.createElement('div');info.className='target-info';container.insertBefore(info,tb.closest('table'));}
-    info.innerHTML=targetInfo;
-  } else if(info) info.remove();
 }
 function updateAssignWeekly(cid,sid,val){
   const w=Math.max(0,parseInt(val)||0);
   let a=store.assignments.find(x=>x.classId===cid&&x.subjectId===sid);
   if(a) a.weekly=w;
   else store.assignments.push({classId:cid,subjectId:sid,teacherId:null,weekly:w});
-  persist();renderProgress();
+  persist();renderAssignments();renderProgress();
 }
 function updateAssignTeacher(cid,sid,tid){
   tid=tid?parseInt(tid):null;
@@ -1603,15 +1654,23 @@ function autoAssignTeachers(){
   if(!store.classes.length||!store.subjects.length||!store.teachers.length){toast('أكمل البيانات','error');return;}
   const load={};store.teachers.forEach(t=>load[t.id]=0);
   store.classes.forEach(c=>{
+    // أولاً: إذا في معلم صف لهذا الصف، أسند له المواد الأساسية
+    const homeroom=store.teachers.find(t=>t.isHomeroom && (t.homeroomClasses||[]).includes(c.id));
     store.subjects.forEach(s=>{
       const el=store.teachers.filter(t=>(t.subjects||[]).includes(s.id) && (!c.shift || !t.shifts?.length || t.shifts.includes(c.shift)));
       if(!el.length) return;
-      el.sort((a,b)=>load[a.id]-load[b.id]);
-      const p=el[0];
+      // prefer homeroom teacher for this class
+      let pick;
+      if(homeroom && homeroom.subjects.includes(s.id)){
+        pick=homeroom;
+      } else {
+        el.sort((a,b)=>load[a.id]-load[b.id]);
+        pick=el[0];
+      }
       let a=store.assignments.find(x=>x.classId===c.id&&x.subjectId===s.id);
-      if(!a) store.assignments.push({classId:c.id,subjectId:s.id,teacherId:p.id,weekly:s.weekly});
-      else a.teacherId=p.id;
-      load[p.id]+=s.weekly;
+      if(!a) store.assignments.push({classId:c.id,subjectId:s.id,teacherId:pick.id,weekly:s.weekly});
+      else a.teacherId=pick.id;
+      load[pick.id]+=s.weekly;
     });
   });
   persist();renderAssignments();renderProgress();toast('تم الإسناد');
@@ -1648,32 +1707,25 @@ function renderConstraints(){
     };
   });
   $('cfg-allow-gaps').onchange=()=>{store.constraints.allowGaps=$('cfg-allow-gaps').checked;persist();};
-  $('avail-teacher').innerHTML=store.teachers.length?store.teachers.map(t=>`<option value="${t.id}">${esc(t.name)}</option>`).join(''):'<option>لا يوجد مدرّسون</option>';
+  $('avail-teacher').innerHTML=store.teachers.length?store.teachers.map(t=>`<option value="${t.id}">${esc(t.name)}${t.isHomeroom?' 🎓':''}</option>`).join(''):'<option>لا يوجد مدرّسون</option>';
   renderAvailability();
 }
 function renderAvailability(){
   const tid=parseInt($('avail-teacher').value);
   const grid=$('avail-grid');
-  if(!tid){
-    grid.innerHTML='<div style="color:var(--text-3);padding:14px;text-align:center;background:var(--surface-2);border-radius:9px">لا يوجد مدرّسون</div>';
-    return;
-  }
+  if(!tid){grid.innerHTML='<div style="color:var(--text-3);padding:14px;text-align:center;background:var(--surface-2);border-radius:9px">لا يوجد مدرّسون</div>';return;}
   const teacher=store.teachers.find(t=>t.id===tid);
-  // حدد الأعمدة حسب الفوج
   let columns=[];
   if(store.shiftsEnabled&&teacher?.shifts?.length===1){
     const shift=teacher.shifts[0];
-    columns=store.shifts[shift].periods.map((p,i)=>({idx:i,label:p.name+(p.isBreak?' (فرصة)':''),isBreak:p.isBreak,shift}));
+    columns=store.shifts[shift].periods.map((p,i)=>({idx:i,label:p.name,isBreak:p.isBreak}));
+  } else if(store.shiftsEnabled){
+    columns=[
+      ...store.shifts.morning.periods.map((p,i)=>({idx:i,label:'☀️ '+p.name,isBreak:p.isBreak})),
+      ...store.shifts.evening.periods.map((p,i)=>({idx:'e'+i,label:'🌙 '+p.name,isBreak:p.isBreak}))
+    ];
   } else {
-    // كلا الفوجين
-    if(store.shiftsEnabled){
-      columns=[
-        ...store.shifts.morning.periods.map((p,i)=>({idx:i,label:'☀️ '+p.name,isBreak:p.isBreak,shift:'morning'})),
-        ...store.shifts.evening.periods.map((p,i)=>({idx:'e'+i,label:'🌙 '+p.name,isBreak:p.isBreak,shift:'evening'}))
-      ];
-    } else {
-      columns=store.periods.map((p,i)=>({idx:i,label:p.name,isBreak:false,shift:null}));
-    }
+    columns=store.periods.map((p,i)=>({idx:i,label:p.name,isBreak:false}));
   }
   if(!store.availability[tid]) store.availability[tid]={};
   const av=store.availability[tid];
@@ -1716,7 +1768,6 @@ function strictValidate(){
   if(!store.classes.length) errors.push({t:'الصفوف',m:'لا توجد صفوف'});
   if(errors.length) return {errors,warnings,ok:false};
 
-  // فحص كل صف
   store.classes.forEach(c=>{
     const periods=getPeriodsForClass(c.id);
     const totalSlots=store.days.length*periods.length;
@@ -1725,18 +1776,12 @@ function strictValidate(){
     const maxClassDay=store.constraints.maxClassPerDay||periods.length;
     const maxCapacity=Math.min(totalSlots,store.days.length*maxClassDay);
     const shiftLabel=c.shift==='morning'?' ☀️':c.shift==='evening'?' 🌙':'';
-    
     if(requiredSum===0) errors.push({t:`صف ${c.grade}/${c.section}${shiftLabel}`,m:'لا يوجد إسناد'});
     else if(requiredSum>maxCapacity) errors.push({t:`صف ${c.grade}/${c.section}${shiftLabel}`,m:`المطلوب ${requiredSum} > الحد (${maxCapacity})`});
-    
-    // فحص النصاب المستهدف
     if(store.shiftsEnabled&&c.shift){
       const target=store.shifts[c.shift].weeklyTarget;
-      if(requiredSum!==target){
-        warnings.push({t:`صف ${c.grade}/${c.section}${shiftLabel}`,m:`النصاب الحالي ${requiredSum} ≠ النصاب الرسمي ${target}`});
-      }
+      if(requiredSum!==target) warnings.push({t:`صف ${c.grade}/${c.section}${shiftLabel}`,m:`النصاب ${requiredSum} ≠ الرسمي ${target}`});
     }
-    
     assignments.forEach(a=>{
       if(!a.teacherId){
         const s=store.subjects.find(x=>x.id===a.subjectId);
@@ -1745,14 +1790,11 @@ function strictValidate(){
     });
   });
 
-  // حمل المدرسين
   const teacherLoad={};
   store.teachers.forEach(t=>{teacherLoad[t.id]={weekly:0,name:t.name,maxWeek:t.maxWeek||30,maxDay:t.maxDay||6};});
   store.assignments.forEach(a=>{if(a.teacherId&&teacherLoad[a.teacherId]) teacherLoad[a.teacherId].weekly+=(a.weekly||0);});
   Object.entries(teacherLoad).forEach(([tid,tl])=>{
-    if(tl.weekly>tl.maxWeek) errors.push({t:tl.name,m:`الحمل ${tl.weekly} > الحد ${tl.maxWeek}`});
-    const minDays=Math.ceil(tl.weekly/tl.maxDay);
-    if(minDays>store.days.length) errors.push({t:tl.name,m:`لا يمكن توزيع ${tl.weekly} على ${store.days.length} أيام بحد ${tl.maxDay}/يوم`});
+    if(tl.weekly>tl.maxWeek) warnings.push({t:tl.name,m:`الحمل ${tl.weekly} > الحد ${tl.maxWeek}`});
   });
 
   return {errors,warnings,ok:errors.length===0};
@@ -1806,7 +1848,6 @@ function generateTimetable(){
     });
   });
   
-  // ترتيب المهام حسب قيود المدرسين
   function availCount(task){
     if(!task.teacherId) return 999;
     let cnt=0;
@@ -1829,7 +1870,6 @@ function generateTimetable(){
   let unplaced=0;
   tasks.forEach(task=>{
     let placed=false;
-    const cls=store.classes.find(c=>c.id===task.classId);
     const periods=task.periods;
     const classDayOrder=[...D].sort((a,b)=>(classDayCount[task.classId][a]||0)-(classDayCount[task.classId][b]||0));
     
@@ -1880,15 +1920,15 @@ function renderTimetables(){
   const filterWrap=$('tt-filter');
   if(store.shiftsEnabled){
     filterWrap.innerHTML=`
-      <button class="chip pill ${ttFilter==='all'?'on':''}" onclick="setTTFilter('all')">الكل</button>
-      <button class="chip pill ${ttFilter==='morning'?'on':''}" onclick="setTTFilter('morning')" style="${ttFilter==='morning'?'background:var(--morning);color:#fff;border-color:var(--morning)':''}">☀️ صباحي</button>
-      <button class="chip pill ${ttFilter==='evening'?'on':''}" onclick="setTTFilter('evening')" style="${ttFilter==='evening'?'background:var(--evening);color:#fff;border-color:var(--evening)':''}">🌙 مسائي</button>
+      <button class="pill ${ttFilter==='all'?'on':''}" onclick="setTTFilter('all')">الكل</button>
+      <button class="pill ${ttFilter==='morning'?'on':''}" onclick="setTTFilter('morning')">☀️ صباحي</button>
+      <button class="pill ${ttFilter==='evening'?'on':''}" onclick="setTTFilter('evening')">🌙 مسائي</button>
     `;
   } else filterWrap.innerHTML='';
   
   const wrap=$('timetables-container');
   if(!store.classes.length){wrap.innerHTML=`<div class="empty"><div class="empty__icon">🎓</div><div class="empty__title">أضف صفوفاً</div></div>`;return;}
-  if(!Object.keys(store.timetable).length){wrap.innerHTML=`<div class="empty"><div class="empty__icon">🗓️</div><div class="empty__title">لم يتم بناء الجدول</div></div>`;return;}
+  if(!Object.keys(store.timetable).length){wrap.innerHTML=`<div class="empty"><div class="empty__icon">🗓️</div><div class="empty__title">لم يتم بناء الجدول</div><div class="empty__desc">اضغط "تحقق وبناء"</div></div>`;return;}
   
   let classes=store.classes;
   if(ttFilter!=='all') classes=classes.filter(c=>c.shift===ttFilter);
@@ -1902,11 +1942,15 @@ function renderTimetables(){
     const required=store.assignments.filter(a=>a.classId===c.id).reduce((s,a)=>s+a.weekly,0);
     const shiftLabel=c.shift==='morning'?'☀️ صباحي':c.shift==='evening'?'🌙 مسائي':'';
     const shiftClass=c.shift==='morning'?'morning':c.shift==='evening'?'evening':'';
+    // Homeroom teacher badge
+    const homeroom=store.teachers.find(t=>t.isHomeroom && (t.homeroomClasses||[]).includes(c.id));
+    const homeroomBadge=homeroom?`<span class="badge badge--homeroom badge--plain" style="margin-right:8px">🎓 معلم الصف: ${esc(homeroom.name)}</span>`:'';
+    
     let html=`<div class="timetable-wrap" id="tt-${c.id}" data-print="class">
       ${printHeaderHTML(`الصف ${esc(c.grade)} / شعبة ${esc(c.section)} ${shiftLabel}`)}
       <div class="timetable-wrap__head no-print">
         <div><h3>${esc(store.school.name)||'مدرسة'} — ${esc(c.grade)} / شعبة ${esc(c.section)} ${shiftLabel}</h3>
-        <div style="font-size:11.5px;color:var(--text-3);margin-top:3px">${filled} / ${total} · المطلوب ${required}${filled<required?`<span style="color:#92400e;font-weight:700"> · ناقص ${required-filled}</span>`:`<span style="color:#059669;font-weight:700"> · مكتمل</span>`}</div></div>
+        <div style="margin-top:4px">${homeroomBadge}<span style="font-size:11.5px;color:var(--text-3)">${filled} / ${total} · المطلوب ${required}${filled<required?`<span style="color:#92400e;font-weight:700"> · ناقص ${required-filled}</span>`:`<span style="color:#059669;font-weight:700"> · مكتمل</span>`}</span></div></div>
         <div style="display:flex;gap:6px">
           <button class="btn btn--info btn--sm" onclick="exportOnePNG(${c.id})">🖼 PNG</button>
           <button class="btn btn--ghost btn--sm" onclick="exportOnePDF(${c.id})">📄 PDF</button>
@@ -1928,9 +1972,11 @@ function renderTimetables(){
           const slot=grid[key];
           if(slot){
             const subj=store.subjects.find(s=>s.id===slot.subjectId);
-            const teach=store.teachers.find(t=>t.id===slot.teacherId);
+            const isHR=isHomeroomForClass(slot.teacherId,c.id);
+            const teacherDisplay=isHR?'🎓 معلم الصف':(store.teachers.find(t=>t.id===slot.teacherId)?.name||'—');
+            const teacherClass=isHR?'slot__teacher homeroom':'slot__teacher';
             const bg=subj?.color?subj.color+'15':'transparent';
-            html+=`<td><div class="slot" style="background:${bg}" onclick="openSlotModal(${c.id},'${key}')"><div class="slot__subject">${esc(subj?.name||'?')}</div><div class="slot__teacher">${esc(teach?.name||'—')}</div></div></td>`;
+            html+=`<td><div class="slot" style="background:${bg}" onclick="openSlotModal(${c.id},'${key}')"><div class="slot__subject">${esc(subj?.name||'?')}</div><div class="${teacherClass}">${esc(teacherDisplay)}</div></div></td>`;
           } else {
             html+=`<td><div class="slot empty no-print" onclick="openSlotModal(${c.id},'${key}')">+ إضافة</div></td>`;
           }
@@ -1993,7 +2039,7 @@ function updateSlotTeachers(preselect){
   const cid=editingSlot?.cid;
   const cls=cid?store.classes.find(c=>c.id===cid):null;
   const eligible=sid?store.teachers.filter(t=>(t.subjects||[]).includes(sid)&&(!cls?.shift||!t.shifts?.length||t.shifts.includes(cls.shift))):store.teachers;
-  $('slot-teacher').innerHTML='<option value="">— بدون —</option>'+eligible.map(t=>`<option value="${t.id}" ${preselect===t.id?'selected':''}>${esc(t.name)}</option>`).join('');
+  $('slot-teacher').innerHTML='<option value="">— بدون —</option>'+eligible.map(t=>`<option value="${t.id}" ${preselect===t.id?'selected':''}>${esc(t.name)}${t.isHomeroom?' 🎓':''}</option>`).join('');
 }
 function saveSlot(){
   if(!editingSlot) return;
@@ -2032,11 +2078,11 @@ function renderTeachersTT(){
     const initials=(t.name.split(' ').filter(Boolean)[0]?.[1]||'م');
     const tSubjects=(t.subjects||[]).map(sid=>store.subjects.find(s=>s.id===sid)?.name).filter(Boolean);
     const shifts=(t.shifts||[]).map(sh=>sh==='morning'?'<span class="shift-tag shift-tag--morning">☀️</span>':'<span class="shift-tag shift-tag--evening">🌙</span>').join('');
-    // Determine columns per day
+    const homeroomTag=t.isHomeroom?`<span class="badge badge--homeroom badge--plain">🎓 معلم صف</span>`:'';
+    
     const dayData={};
     store.days.forEach(day=>{
       dayData[day]=[];
-      // Morning periods
       if(store.shiftsEnabled){
         if(!t.shifts?.length||t.shifts.includes('morning')){
           store.shifts.morning.periods.filter(p=>!p.isBreak).forEach((p,i)=>{
@@ -2062,7 +2108,7 @@ function renderTeachersTT(){
         <div style="display:flex;align-items:center;gap:10px">
           <div class="teacher-card__avatar">${esc(initials)}</div>
           <div>
-            <div class="teacher-card__name">${esc(t.name)} ${shifts}</div>
+            <div class="teacher-card__name">${esc(t.name)} ${shifts} ${homeroomTag}</div>
             <div class="teacher-card__meta">${tSubjects.join('، ')||'—'}</div>
           </div>
         </div>
@@ -2076,9 +2122,10 @@ function renderTeachersTT(){
             const cell=items.length?items.map(s=>{
               const subj=store.subjects.find(x=>x.id===s.subjectId);
               const cls=store.classes.find(c=>c.id===s.classId);
+              const isHR=cls&&isHomeroomForClass(t.id,cls.id);
               const bg=subj?.color?subj.color+'20':'var(--surface-2)';
               const shiftMark=s.shift==='morning'?'☀️':s.shift==='evening'?'🌙':'';
-              return `<div style="display:inline-block;padding:4px 8px;border-radius:6px;background:${bg};margin:2px;font-size:10px;line-height:1.3"><strong>${shiftMark} ${esc(subj?.name||'?')}</strong> <span style="color:var(--text-2)">(${esc(cls?.grade||'')}/${esc(cls?.section||'')})</span></div>`;
+              return `<div style="display:inline-block;padding:4px 8px;border-radius:6px;background:${bg};margin:2px;font-size:10px;line-height:1.3"><strong>${shiftMark} ${esc(subj?.name||'?')}</strong> <span style="color:var(--text-2)">(${esc(cls?.grade||'')}/${esc(cls?.section||'')})${isHR?' 🎓':''}</span></div>`;
             }).join(''):'<span style="color:var(--text-3);font-size:11px">—</span>';
             return `<tr><td style="background:var(--surface-2);font-weight:700;font-size:11px">${esc(day)}</td><td style="padding:6px;text-align:right">${cell}</td></tr>`;
           }).join('')}</tbody>
@@ -2105,6 +2152,7 @@ function getPDFStyles(){
     .timetable .period-cell small{display:block;font-size:8px;color:#333;margin-top:1px;direction:ltr;unicode-bidi:embed}
     .slot__subject{font-weight:700;font-size:10px;color:#000}
     .slot__teacher{font-size:8.5px;color:#333;margin-top:1px}
+    .slot__teacher.homeroom{color:#0891b2;font-weight:700}
     .print-header{display:flex!important;justify-content:space-between;padding-bottom:6px;border-bottom:2px solid #000;margin-bottom:8px}
     .print-header__right,.print-header__left{font-size:10px;line-height:1.5}
     .print-header__center{text-align:center;flex:1}
@@ -2291,8 +2339,9 @@ function exportTimetableExcel(){
     const periods=getPeriodsForClass(c.id);
     const aoa=[];
     const shiftLabel=c.shift==='morning'?' — صباحي':c.shift==='evening'?' — مسائي':'';
+    const homeroom=store.teachers.find(t=>t.isHomeroom && (t.homeroomClasses||[]).includes(c.id));
     aoa.push([`${store.school.name||'مدرسة'} — ${c.grade} / شعبة ${c.section}${shiftLabel}`]);
-    aoa.push([`العام: ${store.school.year||'—'} | الطلاب: ${c.count||0}`]);
+    aoa.push([`العام: ${store.school.year||'—'} | الطلاب: ${c.count||0}${homeroom?' | معلم الصف: '+homeroom.name:''}`]);
     aoa.push([]);
     aoa.push(['الحصة / اليوم',...store.days]);
     periods.forEach((p,pi)=>{
@@ -2301,8 +2350,9 @@ function exportTimetableExcel(){
         const slot=grid[`${day}-${pi}`];
         if(slot){
           const subj=store.subjects.find(s=>s.id===slot.subjectId);
-          const teach=store.teachers.find(t=>t.id===slot.teacherId);
-          row.push(`${subj?.name||''}${teach?' ('+teach.name+')':''}`);
+          const isHR=isHomeroomForClass(slot.teacherId,c.id);
+          const teach=isHR?'معلم الصف':(store.teachers.find(t=>t.id===slot.teacherId)?.name||'');
+          row.push(`${subj?.name||''}${teach?' ('+teach+')':''}`);
         } else row.push('');
       });
       aoa.push(row);
@@ -2310,18 +2360,6 @@ function exportTimetableExcel(){
     const ws=XLSX.utils.aoa_to_sheet(aoa);
     ws['!cols']=[{wch:22},...store.days.map(()=>({wch:18}))];
     ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:store.days.length}},{s:{r:1,c:0},e:{r:1,c:store.days.length}}];
-    const range=XLSX.utils.decode_range(ws['!ref']);
-    for(let R=0;R<=range.e.r;R++){
-      for(let C=0;C<=range.e.c;C++){
-        const addr=XLSX.utils.encode_cell({r:R,c:C});
-        if(!ws[addr]) ws[addr]={t:'s',v:''};
-        const cell=ws[addr];
-        if(R===0) cell.s={font:{name:'Cairo',sz:14,bold:true,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:c.shift==='evening'?'6D28D9':'D97706'}},alignment:{horizontal:'center',vertical:'center',readingOrder:2}};
-        else if(R===1) cell.s={font:{name:'Cairo',sz:11,color:{rgb:'475569'}},fill:{fgColor:{rgb:'F1F5F9'}},alignment:{horizontal:'center',readingOrder:2}};
-        else if(R===3) cell.s={font:{name:'Cairo',sz:11,bold:true,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:'4F46E5'}},alignment:{horizontal:'center',vertical:'center',readingOrder:2}};
-        else if(R>3) cell.s={font:{name:'Cairo',sz:10,color:{rgb:'1E293B'}},fill:{fgColor:{rgb:R%2?'F8FAFC':'FFFFFF'}},alignment:{horizontal:'center',vertical:'center',readingOrder:2},border:{top:{style:'thin',color:{rgb:'E2E8F0'}},bottom:{style:'thin',color:{rgb:'E2E8F0'}},left:{style:{style:'thin',color:{rgb:'E2E8F0'}},right:{style:'thin',color:{rgb:'E2E8F0'}}}};
-      }
-    }
     const name=`${c.grade}_${c.section}_${c.shift==='morning'?'ص':c.shift==='evening'?'م':''}`.replace(/[\\/?*\[\]]/g,'');
     XLSX.utils.book_append_sheet(wb,ws,name.substring(0,28));
   });
