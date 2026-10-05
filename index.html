@@ -2,10 +2,18 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مولّد الجدول المدرسي</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>مولّد الجدول المدرسي — شركة الثقة</title>
+<meta name="description" content="نظام ذكي لبناء الجداول المدرسية احترافية — شركة الثقة، حلب جرابلس">
+<meta name="theme-color" content="#4f46e5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="الجدول">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f46e5'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='white'%3E📅%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx-js-style/1.2.0/xlsx.bundle.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -20,39 +28,29 @@
   --sh-md:0 4px 12px rgba(15,23,42,.08);
   --sh-lg:0 12px 32px rgba(15,23,42,.12);
   --sh-xl:0 24px 48px rgba(15,23,42,.16);
-  --ease:cubic-bezier(.4,0,.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:10px;border:2px solid var(--bg)}
 
-/* ============ AUTH ============ */
-#auth-screen{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
-  padding:24px;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);
-}
+/* AUTH */
+#auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%)}
 #auth-screen::before,#auth-screen::after{content:'';position:absolute;border-radius:50%;filter:blur(80px);opacity:.6}
 #auth-screen::before{width:500px;height:500px;background:#6366f1;top:-150px;right:-100px}
 #auth-screen::after{width:400px;height:400px;background:#ec4899;bottom:-150px;left:-100px}
-.auth-container{
-  position:relative;z-index:2;width:100%;max-width:1000px;
-  display:grid;grid-template-columns:1fr 1fr;
-  background:rgba(255,255,255,.98);backdrop-filter:blur(20px);
-  border-radius:24px;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,.25);
-}
+.auth-container{position:relative;z-index:2;width:100%;max-width:1000px;display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,.98);backdrop-filter:blur(20px);border-radius:24px;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,.25)}
 @media(max-width:820px){.auth-container{grid-template-columns:1fr;max-width:480px}}
 .auth-side{background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 100%);color:#fff;padding:48px 40px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
 .auth-side::before{content:'';position:absolute;top:-100px;left:-100px;width:300px;height:300px;background:radial-gradient(circle,rgba(99,102,241,.4),transparent 70%);border-radius:50%}
 .auth-side__brand{position:relative;display:flex;align-items:center;gap:14px;margin-bottom:40px}
 .auth-side__logo{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#818cf8,#4f46e5 60%,#3730a3);display:grid;place-items:center;font-size:26px;box-shadow:0 12px 32px rgba(79,70,229,.5)}
-.auth-side__brand h1{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.auth-side__brand h1{font-size:20px;font-weight:800}
 .auth-side__brand p{font-size:12.5px;color:#94a3b8;margin-top:2px}
 .auth-side__hero{position:relative;margin:auto 0}
-.auth-side__hero h2{font-size:26px;font-weight:800;line-height:1.3;letter-spacing:-.02em;margin-bottom:16px}
+.auth-side__hero h2{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:16px}
 .auth-side__hero h2 span{background:linear-gradient(90deg,#a5b4fc,#f0abfc);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .auth-side__features{list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:24px}
 .auth-side__features li{display:flex;align-items:center;gap:12px;font-size:13.5px;color:#cbd5e1}
@@ -63,7 +61,7 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .auth-tabs{display:flex;gap:4px;padding:4px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;margin-bottom:28px}
 .auth-tab{flex:1;padding:11px 16px;border-radius:9px;font-size:13.5px;font-weight:700;color:var(--text-3);transition:all .18s}
 .auth-tab.active{background:#fff;color:var(--brand);box-shadow:0 2px 8px rgba(15,23,42,.08)}
-.auth-title{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.auth-title{font-size:22px;font-weight:800;margin-bottom:6px}
 .auth-sub{font-size:13px;color:var(--text-3);margin-bottom:26px}
 .auth-form-grid{display:grid;gap:16px}
 .auth-field{display:flex;flex-direction:column;gap:7px}
@@ -72,21 +70,21 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .auth-field__input{position:relative}
 .auth-field__input input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:11px;background:#fff;font-size:14px;transition:all .15s}
 .auth-field__input input:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 4px rgba(79,70,229,.12)}
-.auth-field__toggle{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:16px;padding:4px;border-radius:6px}
+.auth-field__toggle{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-3);font-size:16px;padding:4px}
 .auth-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:500px){.auth-row{grid-template-columns:1fr}}
-.auth-check{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;font-size:13px;color:var(--text-2)}
+.auth-check{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text-2);cursor:pointer}
 .auth-check input{width:auto;accent-color:var(--brand)}
 .auth-btn{width:100%;padding:14px;border-radius:11px;font-size:14.5px;font-weight:700;background:linear-gradient(180deg,var(--brand-2),var(--brand));color:#fff;box-shadow:0 8px 24px rgba(79,70,229,.3);transition:all .18s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px}
 .auth-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(79,70,229,.4)}
-.auth-error{background:var(--danger-soft);color:var(--danger);padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;display:none;align-items:center;gap:10px;border:1px solid #fecaca}
+.auth-error{background:var(--danger-soft);color:var(--danger);padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;display:none;align-items:center;gap:10px;border:1px solid #fecaca;margin-bottom:16px}
 .auth-error.show{display:flex}
 .auth-error::before{content:'⚠';font-size:16px}
-.auth-note{font-size:11.5px;color:var(--text-3);text-align:center;line-height:1.7;margin-top:16px}
+.auth-note{font-size:11.5px;color:var(--text-3);text-align:center;margin-top:16px;line-height:1.7}
 .auth-link{color:var(--brand);font-weight:700;cursor:pointer}
 .auth-link:hover{text-decoration:underline}
 
-/* ============ APP ============ */
+/* APP */
 .app{display:flex;min-height:100vh}
 .app.hidden{display:none}
 .sidebar{width:280px;flex-shrink:0;background:linear-gradient(180deg,#0b1220,#111827);color:#cbd5e1;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
@@ -109,7 +107,6 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .nav__step:hover{background:rgba(255,255,255,.06);color:#fff}
 .nav__step.active{background:linear-gradient(135deg,rgba(99,102,241,.9),rgba(79,70,229,.9));color:#fff;font-weight:600;box-shadow:0 8px 20px rgba(79,70,229,.35)}
 .nav__step.locked{opacity:.45;cursor:not-allowed}
-.nav__step.locked:hover{background:transparent}
 .nav__step.done .nav__step__num{background:#22c55e;color:#fff}
 .nav__step__num{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-size:11.5px;font-weight:800;flex-shrink:0}
 .nav__step.active .nav__step__num{background:rgba(255,255,255,.25)}
@@ -139,6 +136,7 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .btn--danger{background:var(--danger-soft);color:var(--danger)}
 .btn--success{background:var(--success-soft);color:var(--success)}
 .btn--warning{background:var(--warning-soft);color:var(--warning)}
+.btn--info{background:var(--info-soft);color:var(--info)}
 .btn--lg{padding:12px 22px;font-size:14px;border-radius:11px}
 .btn--sm{padding:6px 11px;font-size:12px;border-radius:7px}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
@@ -152,10 +150,10 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 
 .hero{background:linear-gradient(135deg,#eef2ff 0%,#f5f3ff 50%,#fce7f3 100%);border:1px solid var(--border);border-radius:var(--r-xl);padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-50%;left:-20%;width:400px;height:400px;background:radial-gradient(circle,rgba(99,102,241,.15),transparent 70%);border-radius:50%}
-.hero h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px;position:relative}
+.hero h1{font-size:26px;font-weight:800;margin-bottom:8px;position:relative}
 .hero p{font-size:14px;color:var(--text-2);max-width:600px;position:relative}
 .hero__stats{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;position:relative}
-.hero__stat{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.9);border-radius:12px;padding:12px 18px;min-width:130px}
+.hero__stat{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.9);border-radius:12px;padding:12px 18px;min-width:130px}
 .hero__stat strong{display:block;font-size:22px;font-weight:800;color:var(--brand);line-height:1}
 .hero__stat span{font-size:12px;color:var(--text-2);margin-top:4px;display:block;font-weight:600}
 
@@ -172,10 +170,6 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .flow__status.ok{background:var(--success-soft);color:var(--success)}
 .flow__status.pending{background:var(--warning-soft);color:var(--warning)}
 .flow__status.lock{background:#f1f5f9;color:var(--text-3)}
-.flow__desc{font-size:12.5px;color:var(--text-2);line-height:1.6;margin-bottom:12px}
-.flow__check{font-size:12.5px;color:var(--text-3);display:flex;align-items:center;gap:6px}
-.flow__check.ok{color:var(--success)}
-.flow__check.pending{color:var(--warning)}
 
 .checklist{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:18px 22px;margin-bottom:20px;box-shadow:var(--sh-sm)}
 .checklist__item{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:13px;color:var(--text-2);border-bottom:1px dashed var(--border)}
@@ -196,10 +190,8 @@ input,select,textarea{font-family:inherit;font-size:14px;color:inherit}
 .field textarea{resize:vertical;min-height:70px}
 .field__hint{font-size:11.5px;color:var(--text-3)}
 
-/* Logo & signature upload */
 .upload-box{border:2px dashed var(--border);border-radius:12px;padding:16px;text-align:center;transition:all .15s;cursor:pointer;background:var(--surface-2);position:relative;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
 .upload-box:hover{border-color:var(--brand);background:var(--brand-soft)}
-.upload-box.dragover{border-color:var(--brand);background:var(--brand-soft)}
 .upload-box__icon{font-size:28px;opacity:.5}
 .upload-box__text{font-size:12.5px;color:var(--text-2);font-weight:600}
 .upload-box__hint{font-size:11px;color:var(--text-3)}
@@ -223,7 +215,6 @@ tbody tr:last-child td{border-bottom:none}
 .badge--danger{background:var(--danger-soft);color:var(--danger)}
 .badge--warning{background:var(--warning-soft);color:var(--warning)}
 .badge--info{background:var(--info-soft);color:var(--info)}
-.badge--neutral{background:#f1f5f9;color:var(--text-2)}
 
 .empty{padding:44px 24px;text-align:center}
 .empty__icon{width:60px;height:60px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-size:26px;margin:0 auto 14px}
@@ -245,7 +236,6 @@ tbody tr:last-child td{border-bottom:none}
 .avail-cell.off{background:#fee2e2;color:#991b1b;text-decoration:line-through}
 .avail-head{background:var(--surface-2);color:var(--text-3);font-size:11px;font-weight:700;padding:8px 6px;text-align:center}
 
-/* Timetable */
 .timetable-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;margin-bottom:20px;overflow-x:auto}
 .timetable-wrap__head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
 .timetable-wrap__head h3{font-size:15px;font-weight:700}
@@ -260,10 +250,9 @@ tbody tr:last-child td{border-bottom:none}
 .slot__subject{font-weight:700;font-size:11.5px;line-height:1.25}
 .slot__teacher{color:var(--text-2);font-size:10.5px}
 
-/* Master timetable (grid) */
 .master-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;overflow-x:auto;margin-bottom:20px}
 .master-table{width:100%;border-collapse:separate;border-spacing:0;font-size:11px;min-width:900px}
-.master-table th{background:linear-gradient(135deg,#1e3a8a,#3730a3);color:#fff;padding:8px 6px;font-weight:700;font-size:11px;text-align:center;border:1px solid rgba(255,255,255,.15);position:sticky;top:0}
+.master-table th{background:linear-gradient(135deg,#1e3a8a,#3730a3);color:#fff;padding:8px 6px;font-weight:700;font-size:11px;text-align:center;border:1px solid rgba(255,255,255,.15)}
 .master-table td{border:1px solid var(--border);padding:4px;vertical-align:top;height:52px;font-size:10.5px}
 .master-table .mp-cell{background:var(--surface-2);font-weight:700;color:var(--text-2);font-size:10.5px;padding:6px 4px;width:70px;text-align:center;line-height:1.3}
 .master-table .mp-cell small{display:block;color:var(--text-3);font-size:9px;font-weight:500;margin-top:2px;direction:ltr;unicode-bidi:embed}
@@ -276,27 +265,15 @@ tbody tr:last-child td{border-bottom:none}
 .master-cell.teacher-4{background:#fce7f3}
 .master-cell.teacher-5{background:#ede9fe}
 
-/* Teacher timetable cards */
 .teacher-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
 .teacher-card{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
 .teacher-card__head{padding:14px 18px;background:linear-gradient(135deg,#f8fafc,#eef2ff);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
 .teacher-card__avatar{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:800;flex-shrink:0}
 .teacher-card__name{font-size:14px;font-weight:700}
 .teacher-card__meta{font-size:11.5px;color:var(--text-3);margin-top:2px}
-.teacher-card__stats{display:flex;gap:8px;font-size:11px;color:var(--text-2);font-weight:600}
-.teacher-card__stats span{background:#fff;padding:2px 8px;border-radius:6px;border:1px solid var(--border)}
+.teacher-card__stats{font-size:11px;color:var(--text-2);font-weight:600;background:#fff;padding:2px 8px;border-radius:6px;border:1px solid var(--border)}
 .teacher-card__body{padding:14px}
 
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
-.stat{background:#fff;border:1px solid var(--border);border-radius:var(--r-md);padding:16px;box-shadow:var(--sh-sm)}
-.stat__label{font-size:11px;color:var(--text-3);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
-.stat__value{font-size:24px;font-weight:800;margin-top:4px;line-height:1}
-.stat__value.brand{color:var(--brand)}
-.stat__value.warn{color:var(--warning)}
-.stat__value.bad{color:var(--danger)}
-.stat__value.good{color:var(--success)}
-
-/* Validation results */
 .validation-list{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
 .validation-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:11px;border:1px solid;font-size:13px;line-height:1.5}
 .validation-item--ok{background:var(--success-soft);border-color:#86efac;color:#065f46}
@@ -305,7 +282,6 @@ tbody tr:last-child td{border-bottom:none}
 .validation-item__icon{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0;background:rgba(255,255,255,.6)}
 .validation-item strong{font-weight:700;display:block;margin-bottom:2px}
 
-/* Modal */
 .modal{position:fixed;inset:0;z-index:1000;background:rgba(15,23,42,.5);backdrop-filter:blur(6px);display:none;padding:20px;overflow-y:auto}
 .modal.open{display:flex;align-items:flex-start;justify-content:center;padding-top:5vh}
 .modal__dialog{background:#fff;border-radius:var(--r-xl);width:100%;max-width:680px;box-shadow:var(--sh-lg);animation:modalIn .25s;margin-bottom:5vh}
@@ -328,7 +304,6 @@ tbody tr:last-child td{border-bottom:none}
 .toast--error .toast__icon{background:rgba(239,68,68,.25);color:#fca5a5}
 .toast--info .toast__icon{background:rgba(59,130,246,.25);color:#93c5fd}
 
-/* Site footer */
 .site-footer{padding:20px 28px;border-top:1px solid var(--border);background:linear-gradient(180deg,#fff,#f8fafc);display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--text-3);text-align:center;margin-top:auto}
 .site-footer__brand{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--text-2)}
 .site-footer__logo{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800}
@@ -336,30 +311,24 @@ tbody tr:last-child td{border-bottom:none}
 .site-footer__loc{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--text-2)}
 .site-footer strong{color:var(--brand);font-weight:700}
 
-/* Print */
 .print-header, .print-footer {display:none}
+
 @media print{
   @page{size:A4 landscape;margin:6mm}
   body{background:#fff;font-size:10pt;color:#000}
-  .sidebar,.topbar,.step-bar,.card__tools,.toasts,.modal,.no-print,.site-footer{display:none!important}
+  .sidebar,.topbar,.step-bar,.card__tools,.card__head,.toasts,.modal,.no-print,.site-footer{display:none!important}
   .main,.content{padding:0!important;display:block!important;max-width:none!important}
   .card{box-shadow:none!important;border:none!important;margin:0!important}
   .card__body{padding:0!important}
   .route{display:none!important}
   .route#print-zone{display:block!important}
   .timetable-wrap,.master-wrap{page-break-after:always;padding:0;border:none;margin:0 0 6mm 0}
-  .print-header{display:flex!important;justify-content:space-between;padding-bottom:3mm;border-bottom:2.5px solid #000;margin-bottom:3mm;direction:rtl}
-  .print-header__right,.print-header__left{font-size:10pt;line-height:1.5}
-  .print-header__right{text-align:right}.print-header__left{text-align:left}
+  .print-header{display:flex!important;justify-content:space-between;padding-bottom:3mm;border-bottom:2.5px solid #000;margin-bottom:3mm}
   .print-header__center{text-align:center;flex:1}
-  .print-header__center h2{font-size:15pt;margin-bottom:2mm;font-weight:800}
-  .print-header__center p{font-size:10pt;font-weight:600}
-  .print-header__logo{height:16mm;margin-bottom:2mm}
-  .timetable{border-collapse:collapse!important;min-width:0!important;font-size:9.5pt}
-  .timetable th{background:#1E3A8A!important;color:#fff!important;border:1px solid #000!important;padding:2mm 1mm!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-header__logo{max-height:16mm;margin-bottom:2mm}
+  .timetable{border-collapse:collapse!important;min-width:0!important}
+  .timetable th{background:#1E3A8A!important;color:#fff!important;border:1px solid #000!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .timetable td{border:1px solid #000!important;height:12mm}
-  .timetable .period-cell{background:#E5E7EB!important;font-size:9pt!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .slot:hover{background:transparent!important}
   .slot.empty{display:none!important}
   .print-footer{display:flex!important;justify-content:space-between;margin-top:5mm;padding-top:3mm;border-top:1px dashed #666;font-size:9.5pt;align-items:flex-end}
   .print-footer__sig{text-align:center;min-width:50mm}
@@ -378,14 +347,13 @@ tbody tr:last-child td{border-bottom:none}
   .form-grid,.form-grid--3{grid-template-columns:1fr}
   .step-bar{padding:12px 16px;flex-direction:column;gap:8px}
   .user-chip__info{display:none}
+  .teacher-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     AUTH SCREEN
-=========================================================== -->
+<!-- AUTH SCREEN -->
 <div id="auth-screen">
   <div class="auth-container">
     <div class="auth-side">
@@ -397,7 +365,7 @@ tbody tr:last-child td{border-bottom:none}
         <div class="auth-side__hero">
           <h2>ابنِ الجدول المدرسي <span>في دقائق، بلا صداع</span></h2>
           <ul class="auth-side__features">
-            <li>حساب خاص لكل مدرسة على حدة</li>
+            <li>حساب خاص لكل مدرسة</li>
             <li>مولّد ذكي يحترم كل الشروط</li>
             <li>جدول منفصل لكل مدرّس</li>
             <li>شعار وتوقيع المدير</li>
@@ -405,9 +373,11 @@ tbody tr:last-child td{border-bottom:none}
           </ul>
         </div>
       </div>
-      <div class="auth-side__footer">الإصدار 4.0 · جميع البيانات محفوظة على جهازك فقط</div>
+      <div class="auth-side__footer">
+        <div>الإصدار 4.0 · جميع البيانات محفوظة على جهازك فقط</div>
+        <div style="margin-top:6px;color:#94a3b8">شركة الثقة · حلب — جرابلس</div>
+      </div>
     </div>
-
     <div class="auth-form">
       <div class="auth-tabs">
         <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">تسجيل الدخول</button>
@@ -421,12 +391,12 @@ tbody tr:last-child td{border-bottom:none}
         <div class="auth-form-grid">
           <div class="auth-field">
             <label>اسم المستخدم <span class="req">*</span></label>
-            <div class="auth-field__input"><input type="text" id="login-username" required></div>
+            <div class="auth-field__input"><input type="text" id="login-username" autocomplete="username" required></div>
           </div>
           <div class="auth-field">
             <label>كلمة المرور <span class="req">*</span></label>
             <div class="auth-field__input">
-              <input type="password" id="login-password" required>
+              <input type="password" id="login-password" autocomplete="current-password" required>
               <button type="button" class="auth-field__toggle" onclick="togglePassword('login-password', this)">👁</button>
             </div>
           </div>
@@ -442,25 +412,25 @@ tbody tr:last-child td{border-bottom:none}
           <div class="auth-row">
             <div class="auth-field">
               <label>اسم المستخدم <span class="req">*</span></label>
-              <div class="auth-field__input"><input type="text" id="reg-username" required></div>
+              <div class="auth-field__input"><input type="text" id="reg-username" autocomplete="username" required minlength="3"></div>
             </div>
             <div class="auth-field">
               <label>البريد الإلكتروني</label>
-              <div class="auth-field__input"><input type="email" id="reg-email"></div>
+              <div class="auth-field__input"><input type="email" id="reg-email" autocomplete="email"></div>
             </div>
           </div>
           <div class="auth-row">
             <div class="auth-field">
               <label>كلمة المرور <span class="req">*</span></label>
               <div class="auth-field__input">
-                <input type="password" id="reg-password" required>
+                <input type="password" id="reg-password" autocomplete="new-password" required minlength="6">
                 <button type="button" class="auth-field__toggle" onclick="togglePassword('reg-password', this)">👁</button>
               </div>
             </div>
             <div class="auth-field">
               <label>تأكيد كلمة المرور <span class="req">*</span></label>
               <div class="auth-field__input">
-                <input type="password" id="reg-password2" required>
+                <input type="password" id="reg-password2" autocomplete="new-password" required>
                 <button type="button" class="auth-field__toggle" onclick="togglePassword('reg-password2', this)">👁</button>
               </div>
             </div>
@@ -482,9 +452,7 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<!-- ============================================================
-     APP
-=========================================================== -->
+<!-- APP -->
 <div class="app hidden" id="app">
   <aside class="sidebar">
     <div class="brand">
@@ -507,17 +475,17 @@ tbody tr:last-child td{border-bottom:none}
     <nav class="nav">
       <button class="nav__step" data-route="home"><span class="nav__step__num">🏠</span><span>البداية</span></button>
       <div class="nav__divider">الإعداد</div>
-      <button class="nav__step" data-route="school" data-step="1"><span class="nav__step__num">1</span><span>معلومات المدرسة</span><span class="nav__step__lock" data-lock></span></button>
-      <button class="nav__step" data-route="config" data-step="2"><span class="nav__step__num">2</span><span>الأيام والحصص</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="school"><span class="nav__step__num">1</span><span>معلومات المدرسة</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="config"><span class="nav__step__num">2</span><span>الأيام والحصص</span><span class="nav__step__lock" data-lock></span></button>
       <div class="nav__divider">البيانات</div>
-      <button class="nav__step" data-route="subjects" data-step="3"><span class="nav__step__num">3</span><span>المواد الدراسية</span><span class="nav__step__lock" data-lock></span></button>
-      <button class="nav__step" data-route="teachers" data-step="4"><span class="nav__step__num">4</span><span>المدرسون</span><span class="nav__step__lock" data-lock></span></button>
-      <button class="nav__step" data-route="classes" data-step="5"><span class="nav__step__num">5</span><span>الصفوف والشعب</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="subjects"><span class="nav__step__num">3</span><span>المواد الدراسية</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="teachers"><span class="nav__step__num">4</span><span>المدرسون</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="classes"><span class="nav__step__num">5</span><span>الصفوف والشعب</span><span class="nav__step__lock" data-lock></span></button>
       <div class="nav__divider">البناء</div>
-      <button class="nav__step" data-route="assignments" data-step="6"><span class="nav__step__num">6</span><span>الإسناد</span><span class="nav__step__lock" data-lock></span></button>
-      <button class="nav__step" data-route="constraints" data-step="7"><span class="nav__step__num">7</span><span>الشروط</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="assignments"><span class="nav__step__num">6</span><span>الإسناد</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="constraints"><span class="nav__step__num">7</span><span>الشروط</span><span class="nav__step__lock" data-lock></span></button>
       <div class="nav__divider">النتائج</div>
-      <button class="nav__step" data-route="timetable" data-step="8"><span class="nav__step__num">8</span><span>جداول الصفوف</span><span class="nav__step__lock" data-lock></span></button>
+      <button class="nav__step" data-route="timetable"><span class="nav__step__num">8</span><span>جداول الصفوف</span><span class="nav__step__lock" data-lock></span></button>
       <button class="nav__step" data-route="teachers-tt"><span class="nav__step__num">👨‍🏫</span><span>جداول المدرسين</span></button>
       <button class="nav__step" data-route="master"><span class="nav__step__num">🗂</span><span>الجدول العام</span></button>
     </nav>
@@ -542,11 +510,10 @@ tbody tr:last-child td{border-bottom:none}
     </header>
 
     <div class="content">
-      <!-- HOME -->
       <section id="route-home" class="route">
         <div class="hero">
           <h1 id="hero-welcome">مرحباً بك في مولّد الجدول</h1>
-          <p>رحلة من 8 خطوات متسلسلة + جداول المدرسين والجدول العام. كل خطوة تعتمد على التي قبلها.</p>
+          <p>رحلة من 8 خطوات + جداول المدرسين والجدول العام. كل خطوة تعتمد على التي قبلها.</p>
           <div class="hero__stats">
             <div class="hero__stat"><strong id="h-subjects">0</strong><span>مادة</span></div>
             <div class="hero__stat"><strong id="h-teachers">0</strong><span>مدرّس</span></div>
@@ -561,7 +528,6 @@ tbody tr:last-child td{border-bottom:none}
         <div class="flow" id="home-flow"></div>
       </section>
 
-      <!-- SCHOOL -->
       <section id="route-school" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
@@ -578,29 +544,17 @@ tbody tr:last-child td{border-bottom:none}
               <div class="field"><label>رقم الهاتف</label><input id="sc-phone"></div>
               <div class="field field--full"><label>العنوان</label><input id="sc-address"></div>
               <div class="field field--full"><label>ملاحظات</label><textarea id="sc-notes" rows="2"></textarea></div>
-
               <div class="field"><label>شعار المدرسة</label>
-                <div class="upload-box" id="logo-box" onclick="document.getElementById('logo-input').click()">
-                  <div class="upload-box__icon">🏫</div>
-                  <div class="upload-box__text">انقر لرفع الشعار</div>
-                  <div class="upload-box__hint">PNG أو JPG · يظهر في ترويسة الجداول</div>
-                  <input type="file" id="logo-input" accept="image/*" hidden onchange="handleImageUpload(event, 'logo')">
-                </div>
+                <div class="upload-box" id="logo-box" onclick="document.getElementById('logo-input')?.click()"></div>
               </div>
               <div class="field"><label>توقيع المدير</label>
-                <div class="upload-box" id="signature-box" onclick="document.getElementById('signature-input').click()">
-                  <div class="upload-box__icon">✍️</div>
-                  <div class="upload-box__text">انقر لرفع التوقيع</div>
-                  <div class="upload-box__hint">صورة التوقيع · تظهر أسفل الجداول</div>
-                  <input type="file" id="signature-input" accept="image/*" hidden onchange="handleImageUpload(event, 'signature')">
-                </div>
+                <div class="upload-box" id="signature-box" onclick="document.getElementById('signature-input')?.click()"></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- CONFIG -->
       <section id="route-config" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
@@ -628,7 +582,6 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- SUBJECTS -->
       <section id="route-subjects" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
@@ -642,7 +595,6 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- TEACHERS -->
       <section id="route-teachers" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
@@ -653,7 +605,6 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- CLASSES -->
       <section id="route-classes" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
@@ -664,7 +615,6 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- ASSIGNMENTS -->
       <section id="route-assignments" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
@@ -681,7 +631,6 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- CONSTRAINTS -->
       <section id="route-constraints" class="route" style="display:none">
         <div class="card">
           <div class="card__head"><div><div class="card__title">🚦 الخطوة 7: الشروط والقيود</div></div></div>
@@ -701,7 +650,6 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- TIMETABLE (classes) -->
       <section id="route-timetable" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
@@ -709,7 +657,7 @@ tbody tr:last-child td{border-bottom:none}
             <div class="card__tools">
               <button class="btn btn--primary btn--lg" onclick="validateAndGenerate()">🚀 تحقق وبناء</button>
               <button class="btn btn--success btn--sm" onclick="exportPDF('classes')">📄 PDF</button>
-              <button class="btn btn--info btn--sm" onclick="exportPNG('classes')">🖼 صورة PNG</button>
+              <button class="btn btn--info btn--sm" onclick="exportPNG('classes')">🖼 PNG</button>
               <button class="btn btn--ghost btn--sm" onclick="exportTimetableExcel()">📊 Excel</button>
               <button class="btn btn--ghost btn--sm" onclick="clearTimetable()">🗑 مسح</button>
             </div>
@@ -722,14 +670,13 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- TEACHERS TIMETABLE -->
       <section id="route-teachers-tt" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
             <div><div class="card__title">👨‍🏫 جداول المدرسين</div><div class="card__sub">جدول منفصل لكل مدرّس يعرض كل حصصه</div></div>
             <div class="card__tools">
               <button class="btn btn--success btn--sm" onclick="exportPDF('teachers')">📄 PDF للكل</button>
-              <button class="btn btn--info btn--sm" onclick="exportPNG('teachers')">🖼 صورة PNG</button>
+              <button class="btn btn--info btn--sm" onclick="exportPNG('teachers')">🖼 PNG للكل</button>
               <button class="btn btn--ghost btn--sm" onclick="printTeachers()">🖨 طباعة</button>
             </div>
           </div>
@@ -737,14 +684,13 @@ tbody tr:last-child td{border-bottom:none}
         </div>
       </section>
 
-      <!-- MASTER TIMETABLE -->
       <section id="route-master" class="route" style="display:none">
         <div class="card">
           <div class="card__head">
-            <div><div class="card__title">🗂 الجدول العام للمدرسة</div><div class="card__sub">كل الصفوف جنباً إلى جنب — يكشف التعارضات البصرية</div></div>
+            <div><div class="card__title">🗂 الجدول العام للمدرسة</div><div class="card__sub">كل الصفوف جنباً إلى جنب</div></div>
             <div class="card__tools">
               <button class="btn btn--success btn--sm" onclick="exportPDF('master')">📄 PDF</button>
-              <button class="btn btn--info btn--sm" onclick="exportPNG('master')">🖼 صورة PNG</button>
+              <button class="btn btn--info btn--sm" onclick="exportPNG('master')">🖼 PNG</button>
               <button class="btn btn--ghost btn--sm" onclick="printMaster()">🖨 طباعة</button>
             </div>
           </div>
@@ -761,13 +707,12 @@ tbody tr:last-child td{border-bottom:none}
       </div>
     </div>
 
-    <!-- Print Zone (hidden, used for printing) -->
     <div id="print-zone" class="route" style="display:none"></div>
 
     <footer class="site-footer">
       <span class="site-footer__brand"><span class="site-footer__logo">ث</span>جميع الحقوق محفوظة © <strong>شركة الثقة</strong></span>
       <span class="site-footer__sep"></span>
-      <span class="site-footer__loc">حلب — جرابلس</span>
+      <span class="site-footer__loc">📍 حلب — جرابلس</span>
       <span class="site-footer__sep"></span>
       <span id="footer-year"></span>
     </footer>
@@ -852,7 +797,7 @@ tbody tr:last-child td{border-bottom:none}
       </div>
       <div style="display:grid;gap:8px">
         <button class="btn btn--ghost" style="justify-content:flex-start;padding:12px 16px" onclick="exportBackup()"><span style="font-size:18px">💾</span><div style="text-align:right"><div style="font-weight:700">تصدير نسخة احتياطية</div><div style="font-size:11.5px;color:var(--text-3)">ملف JSON</div></div></button>
-        <button class="btn btn--ghost" style="justify-content:flex-start;padding:12px 16px" onclick="document.getElementById('restore-acc').click()"><span style="font-size:18px">📂</span><div style="text-align:right"><div style="font-weight:700">استعادة نسخة</div><div style="font-size:11.5px;color:var(--text-3)">رفع JSON</div></div><input type="file" id="restore-acc" accept=".json" hidden onchange="restoreBackup(event)"></button>
+        <button class="btn btn--ghost" style="justify-content:flex-start;padding:12px 16px" onclick="document.getElementById('restore-acc').click()"><span style="font-size:18px">📂</span><div style="text-align:right"><div style="font-weight:700">استعادة نسخة</div></div><input type="file" id="restore-acc" accept=".json" hidden onchange="restoreBackup(event)"></button>
         <button class="btn btn--ghost" style="justify-content:flex-start;padding:12px 16px" onclick="showChangePassword()"><span style="font-size:18px">🔑</span><div style="text-align:right"><div style="font-weight:700">تغيير كلمة المرور</div></div></button>
         <button class="btn btn--ghost" style="justify-content:flex-start;padding:12px 16px" onclick="loadDemoData()"><span style="font-size:18px">✨</span><div style="text-align:right"><div style="font-weight:700">تحميل بيانات تجريبية</div></div></button>
         <button class="btn btn--danger" style="justify-content:flex-start;padding:12px 16px" onclick="handleLogout()"><span style="font-size:18px">🚪</span><div style="text-align:right"><div style="font-weight:700">تسجيل الخروج</div></div></button>
@@ -876,22 +821,16 @@ tbody tr:last-child td{border-bottom:none}
 <div class="toasts" id="toasts"></div>
 
 <script>
-/* ============================================================
-   AUTH
-=========================================================== */
+/* ========== AUTH ========== */
 const Auth = {
-  SCHOOLS_KEY: 'timetable_schools_v2',
-  SESSION_KEY: 'timetable_session_v2',
+  SCHOOLS_KEY: 'timetable_schools_v3',
+  SESSION_KEY: 'timetable_session_v3',
   getSchools(){ try { return JSON.parse(localStorage.getItem(this.SCHOOLS_KEY)) || {}; } catch { return {}; } },
-  saveSchools(s){ localStorage.setItem(this.SCHOOLS_KEY, JSON.stringify(s)); },
+  saveSchools(s){ try { localStorage.setItem(this.SCHOOLS_KEY, JSON.stringify(s)); } catch(e){ toast('مساحة التخزين ممتلئة!','error'); } },
   getSession(){ return localStorage.getItem(this.SESSION_KEY); },
   setSession(id){ localStorage.setItem(this.SESSION_KEY, id); },
   clearSession(){ localStorage.removeItem(this.SESSION_KEY); },
-  hash(str){
-    let h1=5381,h2=52711;
-    for(let i=0;i<str.length;i++){const c=str.charCodeAt(i);h1=((h1*33)^c)>>>0;h2=((h2*31)^c)>>>0;}
-    return h1.toString(36)+'-'+h2.toString(36);
-  },
+  hash(str){ let h1=5381,h2=52711; for(let i=0;i<str.length;i++){const c=str.charCodeAt(i);h1=((h1*33)^c)>>>0;h2=((h2*31)^c)>>>0;} return h1.toString(36)+'-'+h2.toString(36); },
   register({username,email,password,schoolName,directorName,seed}){
     const schools=this.getSchools(); username=username.trim().toLowerCase();
     if(username.length<3) throw new Error('اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
@@ -970,22 +909,19 @@ function seedDemoData(data){
   data.school.district='مديرية التربية';
 }
 
-/* ============================================================
-   STATE
-=========================================================== */
 let store=null;
 const STEPS=[
-  {key:'home',title:'البداية',crumbs:'البداية',step:0},
-  {key:'school',title:'معلومات المدرسة',crumbs:'الخطوة 1 / المدرسة',step:1},
-  {key:'config',title:'الأيام والحصص',crumbs:'الخطوة 2 / الإعداد',step:2},
-  {key:'subjects',title:'المواد الدراسية',crumbs:'الخطوة 3 / المواد',step:3},
-  {key:'teachers',title:'المدرسون',crumbs:'الخطوة 4 / المدرسون',step:4},
-  {key:'classes',title:'الصفوف والشعب',crumbs:'الخطوة 5 / الصفوف',step:5},
-  {key:'assignments',title:'الإسناد',crumbs:'الخطوة 6 / الإسناد',step:6},
-  {key:'constraints',title:'الشروط والقيود',crumbs:'الخطوة 7 / الشروط',step:7},
-  {key:'timetable',title:'جداول الصفوف',crumbs:'الخطوة 8 / جداول الصفوف',step:8},
-  {key:'teachers-tt',title:'جداول المدرسين',crumbs:'النتائج / جداول المدرسين',step:9},
-  {key:'master',title:'الجدول العام',crumbs:'النتائج / الجدول العام',step:10}
+  {key:'home',title:'البداية',crumbs:'البداية'},
+  {key:'school',title:'معلومات المدرسة',crumbs:'الخطوة 1 / المدرسة'},
+  {key:'config',title:'الأيام والحصص',crumbs:'الخطوة 2 / الإعداد'},
+  {key:'subjects',title:'المواد الدراسية',crumbs:'الخطوة 3 / المواد'},
+  {key:'teachers',title:'المدرسون',crumbs:'الخطوة 4 / المدرسون'},
+  {key:'classes',title:'الصفوف والشعب',crumbs:'الخطوة 5 / الصفوف'},
+  {key:'assignments',title:'الإسناد',crumbs:'الخطوة 6 / الإسناد'},
+  {key:'constraints',title:'الشروط والقيود',crumbs:'الخطوة 7 / الشروط'},
+  {key:'timetable',title:'جداول الصفوف',crumbs:'الخطوة 8 / جداول الصفوف'},
+  {key:'teachers-tt',title:'جداول المدرسين',crumbs:'النتائج / المدرسون'},
+  {key:'master',title:'الجدول العام',crumbs:'النتائج / الجدول العام'}
 ];
 
 const isStepDone={
@@ -1013,9 +949,6 @@ function persist(){
   Auth.saveSchools(schools);
 }
 
-/* ============================================================
-   HELPERS
-=========================================================== */
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>Date.now()+Math.floor(Math.random()*1000);
@@ -1040,9 +973,6 @@ function confirmDialog(title,desc,onOk){
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m) m.classList.remove('open');}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape') document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));});
 
-/* ============================================================
-   AUTH UI
-=========================================================== */
 function switchAuthTab(tab){
   document.querySelectorAll('.auth-tab').forEach(t=>t.classList.toggle('active',t.id==='tab-'+tab));
   $('form-login').style.display=tab==='login'?'block':'none';
@@ -1071,13 +1001,10 @@ function handleRegister(e){
       username:$('reg-username').value,email:$('reg-email').value,password:pw,
       schoolName:$('reg-school').value,directorName:$('reg-director').value,seed:$('reg-seed').checked
     }));
-    enterApp();toast('تم إنشاء الحساب');
+    enterApp();toast('تم إنشاء الحساب بنجاح');
   }catch(err){showAuthError(err.message);}
 }
 
-/* ============================================================
-   ENTER APP
-=========================================================== */
 function enterApp(){
   const school=Auth.current();
   if(!school){showAuthScreen();return;}
@@ -1113,9 +1040,6 @@ function showAuthScreen(){
   if($('reg-seed')) $('reg-seed').checked=true;
 }
 
-/* ============================================================
-   NAVIGATION
-=========================================================== */
 function canAccess(stepKey){
   const idx=STEPS.findIndex(s=>s.key===stepKey);
   if(idx<=1) return true;
@@ -1134,10 +1058,6 @@ let currentRoute='home';
 function navigate(route,force=false){
   if(!force&&!canAccess(route)){
     toast('أكمل الخطوات السابقة أولاً','error');
-    for(let i=1;i<STEPS.length;i++){
-      const k=STEPS[i].key;
-      if(!isStepDone[k]?.()&&!['constraints','timetable','teachers-tt','master'].includes(k)) return navigate(k,true);
-    }
     return;
   }
   currentRoute=route;
@@ -1183,9 +1103,6 @@ function renderProgress(){
   $('progress-sub').textContent=pct===100?'اذهب للنتائج':'أكمل الخطوات';
 }
 
-/* ============================================================
-   HOME
-=========================================================== */
 function renderHome(){
   $('h-subjects').textContent=store.subjects.length;
   $('h-teachers').textContent=store.teachers.length;
@@ -1201,14 +1118,11 @@ function renderHome(){
     const statusClass=done?'ok':(locked?'lock':'pending');
     const statusText=done?'✓ مكتمل':(locked?'🔒 مقفل':'! ناقص');
     return `<div class="flow__card ${done?'done':''} ${locked?'locked':''}" ${locked?'':`onclick="navigate('${s.key}')"`}>
-      <div class="flow__head"><div class="flow__num">${s.step}</div><div class="flow__title">${s.title}</div><div class="flow__status ${statusClass}">${statusText}</div></div>
+      <div class="flow__head"><div class="flow__num">${s.key==='teachers-tt'?'👨‍🏫':s.key==='master'?'🗂':s.key==='timetable'?'8':STEPS.findIndex(x=>x.key===s.key)}</div><div class="flow__title">${s.title}</div><div class="flow__status ${statusClass}">${statusText}</div></div>
     </div>`;
   }).join('');
 }
 
-/* ============================================================
-   SCHOOL
-=========================================================== */
 function renderSchool(){
   $('sc-name').value=store.school.name||'';
   $('sc-district').value=store.school.district||'';
@@ -1223,17 +1137,18 @@ function renderSchool(){
 }
 function renderUploadBox(key,dataUrl){
   const box=$(key+'-box');
+  if(!box) return;
   if(dataUrl){
     box.innerHTML=`
       <img src="${dataUrl}" class="upload-box__preview" alt="">
       <div class="upload-box__hint">انقر للاستبدال</div>
-      <button class="upload-box__remove" onclick="event.stopPropagation();removeImage('${key}')">✕</button>
+      <button type="button" class="upload-box__remove" onclick="event.stopPropagation();removeImage('${key}')">✕</button>
       <input type="file" id="${key}-input" accept="image/*" hidden onchange="handleImageUpload(event,'${key}')">
     `;
   } else {
     const icons={logo:'🏫',signature:'✍️'};
     const texts={logo:'انقر لرفع الشعار',signature:'انقر لرفع التوقيع'};
-    const hints={logo:'PNG · يظهر في الترويسة',signature:'صورة التوقيع · تظهر أسفل الجداول'};
+    const hints={logo:'PNG/JPG · يظهر في الترويسة',signature:'صورة التوقيع · تظهر أسفل الجداول'};
     box.innerHTML=`
       <div class="upload-box__icon">${icons[key]}</div>
       <div class="upload-box__text">${texts[key]}</div>
@@ -1247,14 +1162,17 @@ function handleImageUpload(e,key){
   if(f.size>2*1024*1024){toast('الحجم الأقصى 2 ميجا','error');return;}
   const r=new FileReader();
   r.onload=ev=>{
-    store.school[key]=ev.target.result;
-    persist();renderUploadBox(key,ev.target.result);updateUI();
-    toast(key==='logo'?'تم رفع الشعار':'تم رفع التوقيع');
+    try{
+      store.school[key]=ev.target.result;
+      persist();renderUploadBox(key,ev.target.result);updateUI();
+      toast(key==='logo'?'تم رفع الشعار':'تم رفع التوقيع');
+    }catch(err){toast('فشل الرفع - المساحة ممتلئة','error');}
   };
   r.readAsDataURL(f);
 }
 function removeImage(key){
   store.school[key]=null;persist();renderUploadBox(key,null);updateUI();
+  toast('تم الحذف','info');
 }
 function saveSchool(){
   store.school.name=$('sc-name').value.trim();
@@ -1269,9 +1187,6 @@ function saveSchool(){
   persist();updateUI();toast('تم الحفظ');goNext();
 }
 
-/* ============================================================
-   CONFIG
-=========================================================== */
 const DEFAULT_DAYS=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 function renderConfig(){
   $('days-pills').innerHTML=DEFAULT_DAYS.map(d=>`<button class="pill ${store.days.includes(d)?'on':''}" onclick="toggleDay('${d}')">${d}</button>`).join('');
@@ -1326,9 +1241,6 @@ function applyDefaultPeriods(){
   persist();renderPeriods();renderConfig();
 }
 
-/* ============================================================
-   SUBJECTS
-=========================================================== */
 let editingSubject=null;
 function openSubjectModal(id){
   editingSubject=id||null;
@@ -1391,9 +1303,6 @@ function presetSubjects(){
   persist();renderSubjects();renderProgress();toast('تمت الإضافة');
 }
 
-/* ============================================================
-   TEACHERS
-=========================================================== */
 let editingTeacher=null;
 let tempTeacherSubjects=[];
 function openTeacherModal(id){
@@ -1461,9 +1370,6 @@ function renderTeachers(){
     : `<tr><td colspan="6"><div class="empty"><div class="empty__icon">👨‍🏫</div><div class="empty__title">لا يوجد مدرّسون</div><button class="btn btn--primary" onclick="openTeacherModal()">＋ إضافة مدرّس</button></div></td></tr>`;
 }
 
-/* ============================================================
-   CLASSES
-=========================================================== */
 let editingClass=null;
 function openClassModal(id){
   editingClass=id||null;
@@ -1508,9 +1414,6 @@ function renderClasses(){
     : `<tr><td colspan="5"><div class="empty"><div class="empty__icon">🎓</div><div class="empty__title">لا توجد صفوف</div><button class="btn btn--primary" onclick="openClassModal()">＋ إضافة صف/شعبة</button></div></td></tr>`;
 }
 
-/* ============================================================
-   ASSIGNMENTS
-=========================================================== */
 function renderAssignmentsPage(){
   $('assign-class').innerHTML=store.classes.length
     ? store.classes.map(c=>`<option value="${c.id}">${esc(c.grade)} - شعبة ${esc(c.section)}</option>`).join('')
@@ -1582,9 +1485,6 @@ function exportAssignments(){
   XLSX.writeFile(wb,`الإسناد_${new Date().toISOString().slice(0,10)}.xlsx`);
 }
 
-/* ============================================================
-   CONSTRAINTS
-=========================================================== */
 function renderConstraints(){
   $('cfg-max-consecutive').value=store.constraints.maxConsecutive;
   $('cfg-max-class-per-day').value=store.constraints.maxClassPerDay;
@@ -1634,142 +1534,82 @@ function toggleAvail(day,i){
   persist();renderAvailability();
 }
 
-/* ============================================================
-   STRICT VALIDATION
-=========================================================== */
 function strictValidate(){
-  const errors=[];
-  const warnings=[];
-  const info=[];
-
+  const errors=[],warnings=[];
   if(!store.school.name) errors.push({t:'معلومات المدرسة',m:'لم يتم إدخال اسم المدرسة'});
   if(!store.days.length) errors.push({t:'أيام الدوام',m:'لم يتم تحديد أي يوم'});
   if(!store.periods.length) errors.push({t:'الحصص',m:'لا توجد حصص'});
   if(!store.subjects.length) errors.push({t:'المواد',m:'لا توجد مواد'});
   if(!store.teachers.length) errors.push({t:'المدرسون',m:'لا يوجد مدرّسون'});
   if(!store.classes.length) errors.push({t:'الصفوف',m:'لا توجد صفوف'});
+  if(errors.length) return {errors,warnings,ok:false};
 
-  if(errors.length) return {errors,warnings,info,ok:false};
+  const totalSlots=store.days.length*store.periods.length;
+  const maxClassDay=store.constraints.maxClassPerDay||store.periods.length;
 
-  const totalSlots = store.days.length * store.periods.length;
-  const maxClassDay = store.constraints.maxClassPerDay || store.periods.length;
-
-  // لكل صف: فحص المجموع
   store.classes.forEach(c=>{
-    const assignments = store.assignments.filter(a=>a.classId===c.id);
-    const requiredSum = assignments.reduce((s,a)=>s+(a.weekly||0),0);
-    const maxCapacity = Math.min(totalSlots, store.days.length * maxClassDay);
-    if(requiredSum === 0){
-      errors.push({t:`صف ${c.grade}/${c.section}`,m:'لا يوجد إسناد'});
-    } else if(requiredSum > maxCapacity){
-      errors.push({t:`صف ${c.grade}/${c.section}`,m:`المطلوب ${requiredSum} حصة > الحد الأقصى (${maxCapacity})`});
-    } else if(requiredSum > totalSlots - 2){
-      warnings.push({t:`صف ${c.grade}/${c.section}`,m:`المطلوب ${requiredSum} حصة قريب جداً من الحد (${totalSlots})`});
-    }
-    // فحص مواد بدون مدرّس
+    const assignments=store.assignments.filter(a=>a.classId===c.id);
+    const requiredSum=assignments.reduce((s,a)=>s+(a.weekly||0),0);
+    const maxCapacity=Math.min(totalSlots,store.days.length*maxClassDay);
+    if(requiredSum===0) errors.push({t:`صف ${c.grade}/${c.section}`,m:'لا يوجد إسناد'});
+    else if(requiredSum>maxCapacity) errors.push({t:`صف ${c.grade}/${c.section}`,m:`المطلوب ${requiredSum} حصة > الحد (${maxCapacity})`});
+    else if(requiredSum>totalSlots-2) warnings.push({t:`صف ${c.grade}/${c.section}`,m:`المطلوب ${requiredSum} قريب من الحد (${totalSlots})`});
     assignments.forEach(a=>{
       if(!a.teacherId){
-        const s = store.subjects.find(x=>x.id===a.subjectId);
+        const s=store.subjects.find(x=>x.id===a.subjectId);
         errors.push({t:`صف ${c.grade}/${c.section}`,m:`المادة "${s?.name||'?'}" بدون مدرّس`});
       }
     });
   });
 
-  // فحص المدرسين: حمل كل مدرّس
-  const teacherLoad = {};
-  store.teachers.forEach(t=>{
-    teacherLoad[t.id] = {
-      weekly: 0,
-      days: {},
-      name: t.name,
-      maxWeek: t.maxWeek || 24,
-      maxDay: t.maxDay || 6
-    };
-  });
-  store.assignments.forEach(a=>{
-    if(!a.teacherId) return;
-    if(teacherLoad[a.teacherId]) teacherLoad[a.teacherId].weekly += (a.weekly||0);
-  });
-
-  // حساب التوزيع اليومي المتوقع
-  Object.values(teacherLoad).forEach(tl=>{
-    if(tl.weekly > tl.maxWeek){
-      errors.push({t:tl.name,m:`الحمل الأسبوعي ${tl.weekly} > الحد ${tl.maxWeek}`});
-    }
-    const minDays = Math.ceil(tl.weekly / tl.maxDay);
-    if(minDays > store.days.length){
-      errors.push({t:tl.name,m:`لا يمكن توزيع ${tl.weekly} حصة على ${store.days.length} أيام (بحد ${tl.maxDay}/يوم)`});
-    }
-    // قيود التوفّر
-    const tid = Object.keys(teacherLoad).find(k=>teacherLoad[k]===tl);
-    if(tid && store.availability[tid]){
-      let availableSlots = 0;
-      store.days.forEach(d=>store.periods.forEach((p,i)=>{
-        if(store.availability[tid][`${d}-${i}`] !== false) availableSlots++;
-      }));
-      if(tl.weekly > availableSlots){
-        errors.push({t:tl.name,m:`الحمل ${tl.weekly} > الخانات المتاحة ${availableSlots} (بسبب قيود التوفّر)`});
-      }
+  const teacherLoad={};
+  store.teachers.forEach(t=>{teacherLoad[t.id]={weekly:0,name:t.name,maxWeek:t.maxWeek||24,maxDay:t.maxDay||6};});
+  store.assignments.forEach(a=>{if(a.teacherId&&teacherLoad[a.teacherId]) teacherLoad[a.teacherId].weekly+=(a.weekly||0);});
+  Object.entries(teacherLoad).forEach(([tid,tl])=>{
+    if(tl.weekly>tl.maxWeek) errors.push({t:tl.name,m:`الحمل ${tl.weekly} > الحد ${tl.maxWeek}`});
+    const minDays=Math.ceil(tl.weekly/tl.maxDay);
+    if(minDays>store.days.length) errors.push({t:tl.name,m:`لا يمكن توزيع ${tl.weekly} على ${store.days.length} أيام (بحد ${tl.maxDay}/يوم)`});
+    if(store.availability[tid]){
+      let availableSlots=0;
+      store.days.forEach(d=>store.periods.forEach((p,i)=>{if(store.availability[tid][`${d}-${i}`]!==false) availableSlots++;}));
+      if(tl.weekly>availableSlots) errors.push({t:tl.name,m:`الحمل ${tl.weekly} > الخانات المتاحة ${availableSlots}`});
     }
   });
 
-  // فحص كل مادة لها مدرّس مؤهّل واحد على الأقل
   store.subjects.forEach(s=>{
-    const eligible = store.teachers.filter(t=>(t.subjects||[]).includes(s.id));
-    if(!eligible.length){
-      const used = store.assignments.some(a=>a.subjectId===s.id && a.weekly>0);
-      if(used) warnings.push({t:s.name,m:'لا يوجد مدرّس مؤهّل لهذه المادة'});
-    }
+    const eligible=store.teachers.filter(t=>(t.subjects||[]).includes(s.id));
+    if(!eligible.length && store.assignments.some(a=>a.subjectId===s.id&&a.weekly>0)) warnings.push({t:s.name,m:'لا يوجد مدرّس مؤهّل'});
   });
 
-  // فحص الحد المتتالي
-  const mc = store.constraints.maxConsecutive || 4;
-  if(mc > store.periods.length){
-    warnings.push({t:'القيود',m:`الحد المتتالي (${mc}) أكبر من عدد الحصص (${store.periods.length})`});
-  }
-
-  return {errors,warnings,info,ok:errors.length===0};
+  return {errors,warnings,ok:errors.length===0};
 }
 
 function renderValidationPanel(result){
-  const panel = $('validation-panel');
+  const panel=$('validation-panel');
   if(!panel) return;
-  if(!result) { panel.innerHTML=''; return; }
-
-  let html = '<div class="validation-list">';
-  if(result.errors.length === 0){
-    html += `<div class="validation-item validation-item--ok"><div class="validation-item__icon">✓</div><div><strong>التحقق نجح</strong>كل البيانات جاهزة لبناء الجدول بدون مشاكل.</div></div>`;
+  if(!result){panel.innerHTML='';return;}
+  let html='<div class="validation-list">';
+  if(result.errors.length===0){
+    html+=`<div class="validation-item validation-item--ok"><div class="validation-item__icon">✓</div><div><strong>التحقق نجح</strong>كل البيانات جاهزة لبناء الجدول.</div></div>`;
   } else {
-    result.errors.forEach(e=>{
-      html += `<div class="validation-item validation-item--err"><div class="validation-item__icon">✕</div><div><strong>${esc(e.t)}</strong>${esc(e.m)}</div></div>`;
-    });
+    result.errors.forEach(e=>{html+=`<div class="validation-item validation-item--err"><div class="validation-item__icon">✕</div><div><strong>${esc(e.t)}</strong>${esc(e.m)}</div></div>`;});
   }
-  result.warnings.forEach(w=>{
-    html += `<div class="validation-item validation-item--warn"><div class="validation-item__icon">!</div><div><strong>${esc(w.t)}</strong>${esc(w.m)}</div></div>`;
-  });
-  html += '</div>';
-
-  // شريط ملخّص
-  const totalReq = store.assignments.reduce((s,a)=>s+(a.weekly||0),0);
-  const totalSlots = store.days.length * store.periods.length * store.classes.length;
-  $('validate-summary').textContent = `${result.errors.length} خطأ · ${result.warnings.length} تحذير · ${totalReq} حصة من ${totalSlots} خانة`;
-  panel.innerHTML = html;
+  result.warnings.forEach(w=>{html+=`<div class="validation-item validation-item--warn"><div class="validation-item__icon">!</div><div><strong>${esc(w.t)}</strong>${esc(w.m)}</div></div>`;});
+  html+='</div>';
+  const totalReq=store.assignments.reduce((s,a)=>s+(a.weekly||0),0);
+  const totalSlots=store.days.length*store.periods.length*store.classes.length;
+  $('validate-summary').textContent=`${result.errors.length} خطأ · ${result.warnings.length} تحذير · ${totalReq} حصة من ${totalSlots} خانة`;
+  panel.innerHTML=html;
   return result.ok;
 }
 
 function validateAndGenerate(){
-  const result = strictValidate();
+  const result=strictValidate();
   renderValidationPanel(result);
-  if(!result.ok){
-    toast(`لا يمكن البناء: ${result.errors.length} خطأ`,'error');
-    return;
-  }
+  if(!result.ok){toast(`لا يمكن البناء: ${result.errors.length} خطأ`,'error');return;}
   generateTimetable();
 }
 
-/* ============================================================
-   GENERATE
-=========================================================== */
 function clearTimetable(){
   if(!Object.keys(store.timetable).length) return;
   confirmDialog('مسح الجدول','سيتم مسح كل جداول الصفوف.',()=>{
@@ -1849,12 +1689,8 @@ function generateTimetable(){
   toast('تم البناء');
 }
 
-/* ============================================================
-   RENDER CLASS TIMETABLES
-=========================================================== */
 function renderTimetables(){
-  // استدع التحقق أولاً
-  const validation = strictValidate();
+  const validation=strictValidate();
   renderValidationPanel(validation);
 
   const wrap=$('timetables-container');
@@ -1900,7 +1736,7 @@ function renderTimetables(){
 }
 
 function printHeaderHTML(subtitle){
-  const logo = store.school.logo ? `<img src="${store.school.logo}" class="print-header__logo" alt="">` : '';
+  const logo=store.school.logo?`<img src="${store.school.logo}" class="print-header__logo" alt="">`:'';
   return `<div class="print-header">
     <div class="print-header__right">
       <div>الجمهورية العربية السورية</div>
@@ -1921,7 +1757,7 @@ function printHeaderHTML(subtitle){
   </div>`;
 }
 function printFooterHTML(){
-  const sig = store.school.signature ? `<img src="${store.school.signature}" alt="">` : '';
+  const sig=store.school.signature?`<img src="${store.school.signature}" alt="">`:'';
   return `<div class="print-footer">
     <div class="print-footer__sig">توقيع معلم الصف<br><span class="line"></span></div>
     <div class="print-footer__sig">${sig}توقيع المدير<br><span class="line"></span></div>
@@ -1929,9 +1765,6 @@ function printFooterHTML(){
   </div>`;
 }
 
-/* ============================================================
-   SLOT EDIT
-=========================================================== */
 let editingSlot=null;
 function openSlotModal(cid,key){
   const c=store.classes.find(x=>x.id===cid);
@@ -1967,34 +1800,28 @@ function deleteSlot(){
   persist();closeModal('m-slot');renderTimetables();editingSlot=null;
 }
 
-/* ============================================================
-   TEACHER TIMETABLES
-=========================================================== */
 function collectTeacherSchedule(tid){
-  const schedule = {}; // "day-periodIndex" -> {classId, subjectId}
-  Object.entries(store.timetable).forEach(([cid, grid])=>{
-    const classId = parseInt(cid);
-    Object.entries(grid).forEach(([key, slot])=>{
-      if(slot.teacherId === tid){
-        schedule[key] = { classId, subjectId: slot.subjectId };
-      }
+  const schedule={};
+  Object.entries(store.timetable).forEach(([cid,grid])=>{
+    const classId=parseInt(cid);
+    Object.entries(grid).forEach(([key,slot])=>{
+      if(slot.teacherId===tid) schedule[key]={classId,subjectId:slot.subjectId};
     });
   });
   return schedule;
 }
 
 function renderTeachersTT(){
-  const wrap = $('teachers-tt-container');
+  const wrap=$('teachers-tt-container');
   if(!Object.keys(store.timetable).length){
-    wrap.innerHTML = `<div class="empty"><div class="empty__icon">👨‍🏫</div><div class="empty__title">لم يتم بناء الجدول بعد</div><div class="empty__desc">اذهب لخطوة 8 وابنِ الجدول</div></div>`;
+    wrap.innerHTML=`<div class="empty"><div class="empty__icon">👨‍🏫</div><div class="empty__title">لم يتم بناء الجدول بعد</div><div class="empty__desc">اذهب لخطوة 8 وابنِ الجدول</div></div>`;
     return;
   }
-  wrap.innerHTML = `<div class="teacher-grid">${store.teachers.map(t=>{
-    const sched = collectTeacherSchedule(t.id);
-    const totalHours = Object.keys(sched).length;
-    const initials = t.name.split(' ').filter(Boolean).map(x=>x[0]).slice(0,2).join('');
-    const initialsAr = (t.name.split(' ').filter(Boolean)[0]?.[1] || 'م');
-    const tSubjects = (t.subjects||[]).map(sid => store.subjects.find(s=>s.id===sid)?.name).filter(Boolean);
+  wrap.innerHTML=`<div class="teacher-grid">${store.teachers.map(t=>{
+    const sched=collectTeacherSchedule(t.id);
+    const totalHours=Object.keys(sched).length;
+    const initialsAr=(t.name.split(' ').filter(Boolean)[0]?.[1]||'م');
+    const tSubjects=(t.subjects||[]).map(sid=>store.subjects.find(s=>s.id===sid)?.name).filter(Boolean);
     return `<div class="teacher-card" data-print="teacher" data-teacher="${t.id}">
       <div class="teacher-card__head">
         <div style="display:flex;align-items:center;gap:10px">
@@ -2004,27 +1831,27 @@ function renderTeachersTT(){
             <div class="teacher-card__meta">${tSubjects.join('، ')||'—'}</div>
           </div>
         </div>
-        <div class="teacher-card__stats"><span>${totalHours} حصة/أسبوع</span></div>
+        <div class="teacher-card__stats">${totalHours} حصة/أسبوع</div>
       </div>
       <div class="teacher-card__body">
         ${printHeaderHTML(`جدول المدرّس: ${esc(t.name)}`)}
         <table class="timetable" style="min-width:0;font-size:11px">
           <thead><tr><th style="width:70px">الحصة</th>${store.days.map(d=>`<th>${esc(d)}</th>`).join('')}</tr></thead>
           <tbody>${store.periods.map((p,pi)=>{
-            let row = `<tr><td class="period-cell">${esc(p.name)}<small>${esc(p.start)}-${esc(p.end)}</small></td>`;
+            let row=`<tr><td class="period-cell">${esc(p.name)}<small>${esc(p.start)}-${esc(p.end)}</small></td>`;
             store.days.forEach(day=>{
-              const key = `${day}-${pi}`;
-              const s = sched[key];
+              const key=`${day}-${pi}`;
+              const s=sched[key];
               if(s){
-                const subj = store.subjects.find(x=>x.id===s.subjectId);
-                const cls = store.classes.find(c=>c.id===s.classId);
-                const bg = subj?.color ? subj.color+'20' : 'var(--surface-2)';
-                row += `<td style="height:48px"><div style="padding:3px;border-radius:5px;background:${bg};font-size:10px;line-height:1.3"><strong>${esc(subj?.name||'?')}</strong><br><span style="color:var(--text-2);font-size:9.5px">${esc(cls?.grade||'')} / ${esc(cls?.section||'')}</span></div></td>`;
+                const subj=store.subjects.find(x=>x.id===s.subjectId);
+                const cls=store.classes.find(c=>c.id===s.classId);
+                const bg=subj?.color?subj.color+'20':'var(--surface-2)';
+                row+=`<td style="height:48px"><div style="padding:3px;border-radius:5px;background:${bg};font-size:10px;line-height:1.3"><strong>${esc(subj?.name||'?')}</strong><br><span style="color:var(--text-2);font-size:9.5px">${esc(cls?.grade||'')} / ${esc(cls?.section||'')}</span></div></td>`;
               } else {
-                row += `<td style="height:48px;background:#fafbfc"></td>`;
+                row+=`<td style="height:48px;background:#fafbfc"></td>`;
               }
             });
-            return row + '</tr>';
+            return row+'</tr>';
           }).join('')}</tbody>
         </table>
         ${printFooterHTML()}
@@ -2037,79 +1864,46 @@ function renderTeachersTT(){
   }).join('')}</div>`;
 }
 
-/* ============================================================
-   MASTER TIMETABLE
-=========================================================== */
 function renderMasterTT(){
-  const wrap = $('master-container');
+  const wrap=$('master-container');
   if(!Object.keys(store.timetable).length){
-    wrap.innerHTML = `<div class="empty"><div class="empty__icon">🗂</div><div class="empty__title">لم يتم بناء الجدول بعد</div></div>`;
+    wrap.innerHTML=`<div class="empty"><div class="empty__icon">🗂</div><div class="empty__title">لم يتم بناء الجدول بعد</div></div>`;
     return;
   }
-  // assign colors to teachers
-  const teacherColors = {};
-  store.teachers.forEach((t,i)=>{
-    teacherColors[t.id] = `teacher-${(i%5)+1}`;
-  });
+  const teacherColors={};
+  store.teachers.forEach((t,i)=>{teacherColors[t.id]=`teacher-${(i%5)+1}`;});
 
-  let html = `<div class="master-wrap" id="master-print">
-    ${printHeaderHTML('الجدول العام لكل الصفوف')}
-    <table class="master-table">
-      <thead><tr>
-        <th style="width:70px">الحصة</th>
-        ${store.classes.map(c=>`<th>${esc(c.grade)} / ${esc(c.section)}</th>`).join('')}
-      </tr></thead>
-      <tbody>`;
-  store.periods.forEach((p,pi)=>{
-    html += `<tr><td class="mp-cell">${esc(p.name)}<small>${esc(p.start)}-${esc(p.end)}</small></td>`;
-    store.classes.forEach(c=>{
-      const grid = store.timetable[c.id] || {};
-      // Collect all slots for this class at this period (across days) — actually master should be per day
-      // We'll show day by day instead: skip period view
-    });
-    html += `</tr>`;
-  });
-  html += `</tbody></table></div>`;
-
-  // Actually build per-day master
-  html = `<div class="master-wrap" id="master-print">
+  let html=`<div class="master-wrap" id="master-print">
     ${printHeaderHTML('الجدول العام لكل الصفوف')}
     ${store.days.map(day=>{
-      let dayHtml = `<div style="margin-bottom:22px;page-break-inside:avoid"><h3 style="font-size:13.5px;font-weight:700;color:var(--brand);margin-bottom:8px">📅 يوم ${esc(day)}</h3>
+      let dayHtml=`<div style="margin-bottom:22px;page-break-inside:avoid"><h3 style="font-size:13.5px;font-weight:700;color:var(--brand);margin-bottom:8px">📅 يوم ${esc(day)}</h3>
       <table class="master-table">
-        <thead><tr>
-          <th style="width:70px">الحصة</th>
-          ${store.classes.map(c=>`<th>${esc(c.grade)} / ${esc(c.section)}</th>`).join('')}
-        </tr></thead>
+        <thead><tr><th style="width:70px">الحصة</th>${store.classes.map(c=>`<th>${esc(c.grade)} / ${esc(c.section)}</th>`).join('')}</tr></thead>
         <tbody>`;
       store.periods.forEach((p,pi)=>{
-        dayHtml += `<tr><td class="mp-cell">${esc(p.name)}<small>${esc(p.start)}-${esc(p.end)}</small></td>`;
+        dayHtml+=`<tr><td class="mp-cell">${esc(p.name)}<small>${esc(p.start)}-${esc(p.end)}</small></td>`;
         store.classes.forEach(c=>{
-          const grid = store.timetable[c.id] || {};
-          const slot = grid[`${day}-${pi}`];
+          const grid=store.timetable[c.id]||{};
+          const slot=grid[`${day}-${pi}`];
           if(slot){
-            const subj = store.subjects.find(s=>s.id===slot.subjectId);
-            const teach = store.teachers.find(t=>t.id===slot.teacherId);
-            const cls = teacherColors[slot.teacherId] || '';
-            dayHtml += `<td><div class="master-cell ${cls}"><strong>${esc(subj?.name||'?')}</strong><span>${esc(teach?.name||'—')}</span></div></td>`;
+            const subj=store.subjects.find(s=>s.id===slot.subjectId);
+            const teach=store.teachers.find(t=>t.id===slot.teacherId);
+            const cls=teacherColors[slot.teacherId]||'';
+            dayHtml+=`<td><div class="master-cell ${cls}"><strong>${esc(subj?.name||'?')}</strong><span>${esc(teach?.name||'—')}</span></div></td>`;
           } else {
-            dayHtml += `<td></td>`;
+            dayHtml+=`<td></td>`;
           }
         });
-        dayHtml += `</tr>`;
+        dayHtml+=`</tr>`;
       });
-      dayHtml += `</tbody></table></div>`;
+      dayHtml+=`</tbody></table></div>`;
       return dayHtml;
     }).join('')}
     ${printFooterHTML()}
   </div>`;
-
-  wrap.innerHTML = html;
+  wrap.innerHTML=html;
 }
 
-/* ============================================================
-   EXPORT PDF
-=========================================================== */
 function getPDFStyles(){
   return `
     .timetable,.master-table{width:100%;border-collapse:collapse;font-size:10px}
@@ -2138,68 +1932,62 @@ function getPDFStyles(){
 }
 
 function buildPDFContainer(elements){
-  const container = document.createElement('div');
-  container.style.cssText = 'direction:rtl;font-family:Cairo,sans-serif;background:#fff;width:297mm;';
+  const container=document.createElement('div');
+  container.style.cssText='direction:rtl;font-family:Cairo,sans-serif;background:#fff;width:297mm;';
   elements.forEach(el=>{
-    const clone = el.cloneNode(true);
+    const clone=el.cloneNode(true);
     clone.querySelectorAll('.no-print').forEach(n=>n.remove());
     clone.querySelectorAll('.timetable-wrap__head').forEach(n=>n.remove());
     clone.querySelectorAll('.slot').forEach(s=>{s.removeAttribute('onclick');s.style.background='transparent';});
-    clone.style.cssText = 'page-break-after:always;padding:8mm;background:#fff;box-sizing:border-box;';
-    const credit = document.createElement('div');
-    credit.className = 'pdf-credit';
-    credit.innerHTML = `جميع الحقوق محفوظة © <strong>شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
+    clone.style.cssText='page-break-after:always;padding:8mm;background:#fff;box-sizing:border-box;';
+    const credit=document.createElement('div');
+    credit.className='pdf-credit';
+    credit.innerHTML=`جميع الحقوق محفوظة © <strong>شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
     clone.appendChild(credit);
     container.appendChild(clone);
   });
-  const style = document.createElement('style');
-  style.textContent = getPDFStyles();
+  const style=document.createElement('style');
+  style.textContent=getPDFStyles();
   container.appendChild(style);
   return container;
 }
 
 function exportPDF(scope){
   if(!Object.keys(store.timetable).length){toast('لا يوجد جدول','error');return;}
-  let elements = [];
-  let filename = '';
-
-  if(scope === 'classes'){
-    elements = store.classes.map(c=>document.getElementById('tt-'+c.id)).filter(Boolean);
-    filename = `جداول_الصفوف_${store.school.name||'مدرسة'}_${new Date().toISOString().slice(0,10)}.pdf`;
-  } else if(scope === 'teachers'){
-    elements = store.teachers.map(t=>document.querySelector(`[data-print="teacher"][data-teacher="${t.id}"]`)).filter(Boolean);
-    filename = `جداول_المدرسين_${store.school.name||'مدرسة'}.pdf`;
-  } else if(scope === 'master'){
-    const el = document.getElementById('master-print');
-    if(el) elements = [el];
-    filename = `الجدول_العام_${store.school.name||'مدرسة'}.pdf`;
+  let elements=[],filename='';
+  if(scope==='classes'){
+    elements=store.classes.map(c=>document.getElementById('tt-'+c.id)).filter(Boolean);
+    filename=`جداول_الصفوف_${store.school.name||'مدرسة'}_${new Date().toISOString().slice(0,10)}.pdf`;
+  } else if(scope==='teachers'){
+    elements=store.teachers.map(t=>document.querySelector(`[data-print="teacher"][data-teacher="${t.id}"]`)).filter(Boolean);
+    filename=`جداول_المدرسين_${store.school.name||'مدرسة'}.pdf`;
+  } else if(scope==='master'){
+    const el=document.getElementById('master-print');
+    if(el) elements=[el];
+    filename=`الجدول_العام_${store.school.name||'مدرسة'}.pdf`;
   }
-
   if(!elements.length){toast('لا يوجد محتوى','error');return;}
-
-  const container = buildPDFContainer(elements);
+  const container=buildPDFContainer(elements);
   document.body.appendChild(container);
   container.style.position='absolute';container.style.right='-99999px';container.style.top='0';
-
   toast('جاري إنشاء PDF...');
   setTimeout(()=>{
     html2pdf().set({
-      margin:0,
-      filename,
+      margin:0,filename,
       image:{type:'jpeg',quality:.98},
       html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false},
       jsPDF:{unit:'mm',format:'a4',orientation:'landscape'},
       pagebreak:{mode:['css','legacy'],before:'.timetable-wrap,.teacher-card'}
     }).from(container).save().then(()=>{container.remove();toast('تم إنشاء PDF');})
-    .catch((e)=>{container.remove();toast('فشل: '+e.message,'error');console.error(e);});
-  }, 100);
+    .catch(e=>{container.remove();toast('فشل: '+e.message,'error');});
+  },100);
 }
 
 function exportOnePDF(cid){
-  const el = document.getElementById('tt-'+cid);
+  const el=document.getElementById('tt-'+cid);
   if(!el){toast('لا يوجد جدول','error');return;}
-  const c = store.classes.find(x=>x.id===cid);
-  const container = buildPDFContainer([el]);
+  const c=store.classes.find(x=>x.id===cid);
+  const container=buildPDFContainer([el]);
   document.body.appendChild(container);
   container.style.position='absolute';container.style.right='-99999px';container.style.top='0';
   toast('جاري إنشاء PDF...');
@@ -2212,14 +2000,14 @@ function exportOnePDF(cid){
       jsPDF:{unit:'mm',format:'a4',orientation:'landscape'}
     }).from(container).save().then(()=>{container.remove();toast('تم');})
     .catch(()=>{container.remove();toast('فشل','error');});
-  }, 100);
+  },100);
 }
 
 function exportTeacherPDF(tid){
-  const el = document.querySelector(`[data-print="teacher"][data-teacher="${tid}"]`);
+  const el=document.querySelector(`[data-print="teacher"][data-teacher="${tid}"]`);
   if(!el){toast('لا يوجد جدول','error');return;}
-  const t = store.teachers.find(x=>x.id===tid);
-  const container = buildPDFContainer([el]);
+  const t=store.teachers.find(x=>x.id===tid);
+  const container=buildPDFContainer([el]);
   document.body.appendChild(container);
   container.style.position='absolute';container.style.right='-99999px';container.style.top='0';
   toast('جاري إنشاء PDF...');
@@ -2232,161 +2020,129 @@ function exportTeacherPDF(tid){
       jsPDF:{unit:'mm',format:'a4',orientation:'landscape'}
     }).from(container).save().then(()=>{container.remove();toast('تم');})
     .catch(()=>{container.remove();toast('فشل','error');});
-  }, 100);
+  },100);
 }
 
-/* ============================================================
-   EXPORT PNG
-=========================================================== */
 function exportPNG(scope){
   if(!Object.keys(store.timetable).length){toast('لا يوجد جدول','error');return;}
-  let elements = [];
-  let filename = '';
-
-  if(scope === 'classes'){
-    elements = store.classes.map(c=>document.getElementById('tt-'+c.id)).filter(Boolean);
-    filename = `جداول_الصفوف_${new Date().toISOString().slice(0,10)}.png`;
-  } else if(scope === 'teachers'){
-    elements = store.teachers.map(t=>document.querySelector(`[data-print="teacher"][data-teacher="${t.id}"]`)).filter(Boolean);
-    filename = `جداول_المدرسين.png`;
-  } else if(scope === 'master'){
-    const el = document.getElementById('master-print');
-    if(el) elements = [el];
-    filename = `الجدول_العام.png`;
+  let elements=[],filename='';
+  if(scope==='classes'){
+    elements=store.classes.map(c=>document.getElementById('tt-'+c.id)).filter(Boolean);
+    filename=`جداول_الصفوف_${new Date().toISOString().slice(0,10)}.png`;
+  } else if(scope==='teachers'){
+    elements=store.teachers.map(t=>document.querySelector(`[data-print="teacher"][data-teacher="${t.id}"]`)).filter(Boolean);
+    filename=`جداول_المدرسين.png`;
+  } else if(scope==='master'){
+    const el=document.getElementById('master-print');
+    if(el) elements=[el];
+    filename=`الجدول_العام.png`;
   }
-
   if(!elements.length){toast('لا يوجد محتوى','error');return;}
-
   toast('جاري إنشاء الصور...');
-  // Build a container to render all together
-  const container = document.createElement('div');
-  container.style.cssText = 'direction:rtl;font-family:Cairo,sans-serif;background:#fff;position:absolute;right:-99999px;top:0;width:1200px;padding:20px;';
+  const container=document.createElement('div');
+  container.style.cssText='direction:rtl;font-family:Cairo,sans-serif;background:#fff;position:absolute;right:-99999px;top:0;width:1200px;padding:20px;';
   elements.forEach(el=>{
-    const clone = el.cloneNode(true);
+    const clone=el.cloneNode(true);
     clone.querySelectorAll('.no-print').forEach(n=>n.remove());
     clone.querySelectorAll('.timetable-wrap__head').forEach(n=>n.remove());
     clone.querySelectorAll('.slot').forEach(s=>{s.removeAttribute('onclick');s.style.background='transparent';});
-    clone.style.cssText = 'padding:20px;background:#fff;margin-bottom:20px;border:1px solid #e2e8f0;border-radius:10px;';
-    const credit = document.createElement('div');
-    credit.style.cssText = 'margin-top:12px;padding-top:8px;border-top:1px solid #999;text-align:center;font-size:11px;color:#333';
-    credit.innerHTML = `جميع الحقوق محفوظة © <strong style="color:#1E3A8A">شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
+    clone.style.cssText='padding:20px;background:#fff;margin-bottom:20px;border:1px solid #e2e8f0;border-radius:10px;';
+    const credit=document.createElement('div');
+    credit.style.cssText='margin-top:12px;padding-top:8px;border-top:1px solid #999;text-align:center;font-size:11px;color:#333';
+    credit.innerHTML=`جميع الحقوق محفوظة © <strong style="color:#1E3A8A">شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
     clone.appendChild(credit);
     container.appendChild(clone);
   });
-  const style = document.createElement('style');
-  style.textContent = getPDFStyles();
+  const style=document.createElement('style');
+  style.textContent=getPDFStyles();
   container.appendChild(style);
   document.body.appendChild(container);
-
   setTimeout(()=>{
-    html2canvas(container, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-      logging: false,
-      width: container.scrollWidth,
-      height: container.scrollHeight
-    }).then(canvas=>{
-      canvas.toBlob(blob=>{
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = filename;
-        a.click();
-        container.remove();
-        toast('تم إنشاء الصورة');
-      }, 'image/png', 1.0);
-    }).catch(err=>{
-      container.remove();
-      toast('فشل إنشاء الصورة','error');
-      console.error(err);
-    });
-  }, 200);
+    html2canvas(container,{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false,width:container.scrollWidth,height:container.scrollHeight})
+      .then(canvas=>{
+        canvas.toBlob(blob=>{
+          const a=document.createElement('a');
+          a.href=URL.createObjectURL(blob);
+          a.download=filename;
+          a.click();
+          container.remove();
+          toast('تم إنشاء الصورة');
+        },'image/png',1.0);
+      }).catch(err=>{container.remove();toast('فشل','error');console.error(err);});
+  },200);
 }
 
 function exportOnePNG(cid){
-  const el = document.getElementById('tt-'+cid);
+  const el=document.getElementById('tt-'+cid);
   if(!el){toast('لا يوجد جدول','error');return;}
-  const c = store.classes.find(x=>x.id===cid);
-  const container = document.createElement('div');
-  container.style.cssText = 'direction:rtl;font-family:Cairo,sans-serif;background:#fff;position:absolute;right:-99999px;top:0;width:1200px;padding:20px;';
-  const clone = el.cloneNode(true);
+  const c=store.classes.find(x=>x.id===cid);
+  const container=document.createElement('div');
+  container.style.cssText='direction:rtl;font-family:Cairo,sans-serif;background:#fff;position:absolute;right:-99999px;top:0;width:1200px;padding:20px;';
+  const clone=el.cloneNode(true);
   clone.querySelectorAll('.no-print').forEach(n=>n.remove());
   clone.querySelectorAll('.timetable-wrap__head').forEach(n=>n.remove());
   clone.querySelectorAll('.slot').forEach(s=>{s.removeAttribute('onclick');s.style.background='transparent';});
-  clone.style.cssText = 'padding:20px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;';
-  const credit = document.createElement('div');
-  credit.style.cssText = 'margin-top:12px;padding-top:8px;border-top:1px solid #999;text-align:center;font-size:11px;color:#333';
-  credit.innerHTML = `جميع الحقوق محفوظة © <strong style="color:#1E3A8A">شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
+  clone.style.cssText='padding:20px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;';
+  const credit=document.createElement('div');
+  credit.style.cssText='margin-top:12px;padding-top:8px;border-top:1px solid #999;text-align:center;font-size:11px;color:#333';
+  credit.innerHTML=`جميع الحقوق محفوظة © <strong style="color:#1E3A8A">شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
   clone.appendChild(credit);
   container.appendChild(clone);
-  const style = document.createElement('style');
-  style.textContent = getPDFStyles();
+  const style=document.createElement('style');
+  style.textContent=getPDFStyles();
   container.appendChild(style);
   document.body.appendChild(container);
-
   toast('جاري إنشاء الصورة...');
   setTimeout(()=>{
-    html2canvas(container, {scale:2,useCORS:true,backgroundColor:'#fff',logging:false}).then(canvas=>{
+    html2canvas(container,{scale:2,useCORS:true,backgroundColor:'#fff',logging:false}).then(canvas=>{
       canvas.toBlob(blob=>{
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `جدول_${c?.grade||''}_${c?.section||''}.png`;
+        const a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download=`جدول_${c?.grade||''}_${c?.section||''}.png`;
         a.click();
         container.remove();
         toast('تم');
-      }, 'image/png', 1.0);
+      },'image/png',1.0);
     }).catch(err=>{container.remove();toast('فشل','error');});
-  }, 200);
+  },200);
 }
 
 function exportTeacherPNG(tid){
-  const el = document.querySelector(`[data-print="teacher"][data-teacher="${tid}"]`);
+  const el=document.querySelector(`[data-print="teacher"][data-teacher="${tid}"]`);
   if(!el){toast('لا يوجد','error');return;}
-  const t = store.teachers.find(x=>x.id===tid);
-  const container = document.createElement('div');
-  container.style.cssText = 'direction:rtl;font-family:Cairo,sans-serif;background:#fff;position:absolute;right:-99999px;top:0;width:1000px;padding:20px;';
-  const clone = el.cloneNode(true);
+  const t=store.teachers.find(x=>x.id===tid);
+  const container=document.createElement('div');
+  container.style.cssText='direction:rtl;font-family:Cairo,sans-serif;background:#fff;position:absolute;right:-99999px;top:0;width:1000px;padding:20px;';
+  const clone=el.cloneNode(true);
   clone.querySelectorAll('.no-print').forEach(n=>n.remove());
-  clone.style.cssText = 'padding:20px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;';
-  const credit = document.createElement('div');
-  credit.style.cssText = 'margin-top:12px;padding-top:8px;border-top:1px solid #999;text-align:center;font-size:11px;color:#333';
-  credit.innerHTML = `جميع الحقوق محفوظة © <strong style="color:#1E3A8A">شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
+  clone.style.cssText='padding:20px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;';
+  const credit=document.createElement('div');
+  credit.style.cssText='margin-top:12px;padding-top:8px;border-top:1px solid #999;text-align:center;font-size:11px;color:#333';
+  credit.innerHTML=`جميع الحقوق محفوظة © <strong style="color:#1E3A8A">شركة الثقة</strong> · حلب — جرابلس · ${new Date().getFullYear()}`;
   clone.appendChild(credit);
   container.appendChild(clone);
-  const style = document.createElement('style');
-  style.textContent = getPDFStyles();
+  const style=document.createElement('style');
+  style.textContent=getPDFStyles();
   container.appendChild(style);
   document.body.appendChild(container);
   toast('جاري إنشاء الصورة...');
   setTimeout(()=>{
-    html2canvas(container, {scale:2,useCORS:true,backgroundColor:'#fff',logging:false}).then(canvas=>{
+    html2canvas(container,{scale:2,useCORS:true,backgroundColor:'#fff',logging:false}).then(canvas=>{
       canvas.toBlob(blob=>{
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `جدول_${t?.name||'مدرّس'}.png`;
+        const a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download=`جدول_${t?.name||'مدرّس'}.png`;
         a.click();
         container.remove();
         toast('تم');
-      }, 'image/png', 1.0);
+      },'image/png',1.0);
     }).catch(err=>{container.remove();toast('فشل','error');});
-  }, 200);
+  },200);
 }
 
-/* ============================================================
-   PRINT
-=========================================================== */
-function printTeachers(){
-  if(!Object.keys(store.timetable).length){toast('لا يوجد جدول','error');return;}
-  window.print();
-}
-function printMaster(){
-  if(!Object.keys(store.timetable).length){toast('لا يوجد جدول','error');return;}
-  window.print();
-}
+function printTeachers(){if(!Object.keys(store.timetable).length){toast('لا يوجد جدول','error');return;}window.print();}
+function printMaster(){if(!Object.keys(store.timetable).length){toast('لا يوجد جدول','error');return;}window.print();}
 
-/* ============================================================
-   EXCEL EXPORT
-=========================================================== */
 function exportTimetableExcel(){
   if(!Object.keys(store.timetable).length){toast('لا يوجد جدول','error');return;}
   const wb=XLSX.utils.book_new();wb.Workbook={Views:[{RTL:true}]};
@@ -2396,7 +2152,7 @@ function exportTimetableExcel(){
     aoa.push([`${store.school.name||'مدرسة'} — ${c.grade} / شعبة ${c.section}`]);
     aoa.push([`العام: ${store.school.year||'—'} | الطلاب: ${c.count||0}`]);
     aoa.push([]);
-    aoa.push(['الحصة / اليوم', ...store.days]);
+    aoa.push(['الحصة / اليوم',...store.days]);
     store.periods.forEach((p,pi)=>{
       const row=[`${p.name} (${p.start} - ${p.end})`];
       store.days.forEach(day=>{
@@ -2432,9 +2188,6 @@ function exportTimetableExcel(){
   toast('تم التصدير');
 }
 
-/* ============================================================
-   ACCOUNT
-=========================================================== */
 function openAccountMenu(){
   const school=Auth.current();
   if(school){
@@ -2486,9 +2239,15 @@ function restoreBackup(e){
   r.readAsText(f);e.target.value='';
 }
 
-/* ============================================================
-   INIT
-=========================================================== */
+// PWA Service Worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js',{scope:'./'})
+      .then(reg=>console.log('SW registered:',reg.scope))
+      .catch(err=>console.warn('SW failed:',err));
+  });
+}
+
 window.addEventListener('DOMContentLoaded',()=>{
   $('footer-year').textContent=new Date().getFullYear();
   const school=Auth.current();
